@@ -1,0 +1,226 @@
+{
+  "Cabinet_8dc96e98": {
+    "name": "agent",
+    "position": {
+      "x": -0.20000021159648895,
+      "y": 0.9009991884231567,
+      "z": -0.30000004172325134
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 270.0,
+      "z": 0.0
+    },
+    "cameraHorizon": -15.0,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "Cabinet_178a2f0f": {
+    "name": "agent",
+    "position": {
+      "x": -0.20000021159648895,
+      "y": 0.9009991884231567,
+      "z": -0.30000004172325134
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 270.0,
+      "z": 0.0
+    },
+    "cameraHorizon": -15.0,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "CounterTop2": {
+    "name": "agent",
+    "position": {
+      "x": -0.20000021159648895,
+      "y": 0.9009991884231567,
+      "z": -0.30000004172325134
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 270.0,
+      "z": 0.0
+    },
+    "cameraHorizon": 10.0,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "CounterTop1": {
+    "name": "agent",
+    "position": {
+      "x": -0.30000022053718567,
+      "y": 0.9009991884231567,
+      "z": -0.30000004172325134
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "cameraHorizon": 35.0,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "StoveBurner_58b674c4": {
+    "name": "agent",
+    "position": {
+      "x": -0.30000022053718567,
+      "y": 0.9009991884231567,
+      "z": -0.8000001311302185
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 270.0,
+      "z": 0.0
+    },
+    "cameraHorizon": 40.0,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "Drawer_f530e642": {
+    "name": "agent",
+    "position": {
+      "x": -0.30000022053718567,
+      "y": 0.9009991884231567,
+      "z": -1.2000001668930054
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 240.0,
+      "z": 0.0
+    },
+    "cameraHorizon": 40.0,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "CounterTop3": {
+    "name": "agent",
+    "position": {
+      "x": -0.30000022053718567,
+      "y": 0.9009991884231567,
+      "z": -1.2000001668930054
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 240.0,
+      "z": 0.0
+    },
+    "cameraHorizon": 30.00000762939453,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "Cabinet_bc977650": {
+    "name": "agent",
+    "position": {
+      "x": -0.30000022053718567,
+      "y": 0.9009991884231567,
+      "z": -1.2000001668930054
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 240.0,
+      "z": 0.0
+    },
+    "cameraHorizon": -20.0,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "SinkBasin_28084e25": {
+    "name": "agent",
+    "position": {
+      "x": -0.10000022500753403,
+      "y": 0.9009991884231567,
+      "z": -1.2000001668930054
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 180.0,
+      "z": 0.0
+    },
+    "cameraHorizon": 25.00000762939453,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "CounterTop4": {
+    "name": "agent",
+    "position": {
+      "x": 0.7999998331069946,
+      "y": 0.9009991884231567,
+      "z": -1.2000001668930054
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 180.0,
+      "z": 0.0
+    },
+    "cameraHorizon": 55.00000762939453,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "CounterTop5": {
+    "name": "agent",
+    "position": {
+      "x": 0.9732049703598022,
+      "y": 0.9009991884231567,
+      "z": -1.3000001907348633
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 90.0,
+      "z": 0.0
+    },
+    "cameraHorizon": 35.00001907348633,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "Cabinet_2fee59ce": {
+    "name": "agent",
+    "position": {
+      "x": 0.9732049703598022,
+      "y": 0.9009991884231567,
+      "z": -1.4000002145767212
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 90.0,
+      "z": 0.0
+    },
+    "cameraHorizon": -25.0,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "Cabinet_5c8637ba": {
+    "name": "agent",
+    "position": {
+      "x": 0.9732049703598022,
+      "y": 0.9009991884231567,
+      "z": -1.4000002145767212
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 90.0,
+      "z": 0.0
+    },
+    "cameraHorizon": -25.0,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  },
+  "Fridge_683c888d": {
+    "name": "agent",
+    "position": {
+      "x": 0.6732048988342285,
+      "y": 0.9009991884231567,
+      "z": -0.5
+    },
+    "rotation": {
+      "x": -0.0,
+      "y": 90.0,
+      "z": 0.0
+    },
+    "cameraHorizon": 35.0000114440918,
+    "isStanding": true,
+    "inHighFrictionArea": false
+  }
+}

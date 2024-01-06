@@ -1,0 +1,46 @@
+{english_description}
+
+----
+
+Given the description above, generate the corresponding Python implementation for the [Generalized Rule] step by step:
+
+First, analyze the [Relevant Information] and the IF part of the [Generalized Rule] and determine what variable bindings are needed. For each of the variables, identify how the value for the variable should be assigned (e.g. parsed from current_task, iterate through all receptacles, etc.) Additionally, state what constraint(s) should the value satisfy.
+
+Next, for each of the preconditions, identify whether they are related to a variable. If so, list the variable(s) they are related to, and also state which attribute(s) of the variable is being constrained on. Pay attention to the implicit constraints. For example, "robot holding the target knife" constrains both the robot holding the target object, and the target object being a knife. Otherwise, state what part(s) are they concerned with (e.g. current task). Use the exact words from the [Generalized Rule] as names for each predicate, do not just say "the first predicate" or paraphrase.
+
+Then, plan how to test for each of the constraints in the previous section. Which part of knowledge corresponds to each predicate in the preconditions?
+As a reminder, you must not use direct string comparison (`==` or `!=`) when comparing object types, object names, or location names. Always use `name_compare` to avoid compatibility issues.
+
+Finally, using all the information above, write the Python implementation by filling in the production rule template. Include all the variable bindings, preconditions, and effects. Comment your code properly.
+
+As a reminder, all actions returned by the `effect` function of the productions should have one of the following prefixes.
+ * motor action: ...
+ * attend to subtask: ...
+ * special action: ...
+
+Also, below is a list of `target_task` for the existing productions in the robot. If the production you generated fits into one of the following, use the exact words for consistency. Otherwise, you can come up with your own `target_task` but make sure the format is similar.
+{list_of_tasks}
+
+Use the following format:
+[Variable Bindings]
+ * name of variable 1: a brief description of what this variable is for. Its value should be assigned based on the current task.
+ * name of variable 2: a brief description of variable 2. Its value should be assigned based on the current location. It has to be a ...
+ * name of variable 3: a brief description of variable 3. Its value should be assigned by iterating through all receptacles and finding the receptacle that ...
+ * ...
+
+[Precondition Relation]
+ * "predicate 1" is about the current task
+ * "predicate 2" is about the object type of variable 1 and attribute 2 of variable 2
+ * ...
+
+[Precondition Test]
+ * The robot's gripper is empty can be tested by checking if `spatial_knowledge["RobotGripper"].hosting == []`
+ * The target receptacle is opened can be tested by checking if `object_knowledge[spatial_knowledge[target_receptacle]].opened`
+ * The target receptacle is not empty can be tested by checking if `spatial_knowledge[target_receptacle].hosting is not None and spatial_knowledge[target_receptacle].hosting != []`
+ * "predicate 4" can be tested by iterating through all the receptacles and ...
+ * ...
+
+[Python Implementation]
+```py
+<Your Code Here>
+```

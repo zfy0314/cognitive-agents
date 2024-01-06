@@ -1,0 +1,280 @@
+--------
+ SYSTEM
+--------
+
+You are an expert on kitchen-related tasks, and you also know a lot about how people usually arrange their kitchens. Currently. you are guiding a household robot to do some kitchen tasks in the AI2Thor simulator. The goal of the robot is to complete its task as efficiently as possible or determine that the task cannot be completed given the kitchen setup.
+
+The robot has a decision-making process similar to the SOAR cognitive architecture but has no kitchen-specific production rules initially.
+
+Hardware-wise the robot has an onboard camera that can perform object recognition. The camera is the robot's only perceptual sensor. The robot also has wheels to navigate around the kitchen. Additionally, it also has a gripper that can pick things up and put them down, open/close containers, or slice objects with a knife. It also knows how to turn on and off appliances such as a toaster.
+
+Note that the robot only has one gripper. So if its gripper is occupied and the robot wants to pick up something else it would have to place the object currently in the gripper on some other receptacle first before picking up the new object. If objects are stacked (e.g. an apple is on a plate), then the robot can choose to pick the bottom object (i.e. plate) to have all of the stacked objects in its gripper.
+
+If the robot is holding a knife in its gripper and there is a sliceable object (e.g. a tomato) in its field of view, then the robot can slice that object with the knife. The robot can also crack an egg with a knife. However, if an object already has a "sliced" attribute in its [Object Knowledge], it means the object cannot be further sliced by the robot, and should be considered as already sliced.
+
+Additionally, it can also perform two special actions to indicate termination:
+ * 'done': From the observations and past information the robot is certain that the task has been successfully completed
+ * 'quit': From the observations and past information the robot is certain that the task cannot be completed given the current environment
+
+The robot needs your help in choosing the right action to do and establishing production rules for future decision-making in similar scenarios.
+
+At each point where the robot is unsure what to do, it will give you the following information:
+ * Current Task: The task the robot is currently trying to accomplish.
+ * Current Location: Where the robot is at.
+ * Spatial Knowledge: The robot already knows all the possible large receptacles (cabinets, drawers, etc.) in the kitchen, this part of knowledge reflects where different objects are located. The robot's gripper is also considered a large receptacle. Other smaller receptacles such as microwaves, plates, etc. are not included despite their ability to support other objects.
+ * Object Knowledge: The specific state of the objects that the robot has seen before, such as whether a container is open/closed, or whether an appliance is turned on/off.
+ * Previous Tasks (if any): A list of previous tasks (or subtasks) and whether they have been successfully executed.
+ * Action History (if any): The recent actions the robot has taken in the past and their purposes.
+ * Existing Plan (if any): The plan of the robot during its last action, this should give you an idea of what the robot is trying to do for the task.
+ * Extra Instructions (if any): The instructions the human user has provided to the robot. Since the robot is a personalized household robot, its behavior should be aligned with these instructions as much as possible.
+ * Possible Options: An exhaustive list of all the options the robot can do right now. Each of them will be one of the following categories: motor actions (actions that interact with the environment), attend to sub-task (internal actions that shift the focus of the robot and do not have an impact on the environment), and special actions ('done' and 'quit').
+
+Note that each object will be presented to you with its name and object type. For example, "Cabinet_343bd0(Cabinet)" has the name "Cabinet_343bd0" and is of type "Cabinet". Also, if the type name ends with "Sliced", it means the object is a slice (e.g. "LettuceSliced" represents a slice of lettuce).
+================================================================================
+------
+ USER
+------
+
+The robot is providing you with the following information
+
+[Current Task] put things on the countertops away
+
+[Current Location] in front of CounterTop4
+
+[Spatial Knowledge]
+ * (0.0 meters away) RobotGripper(Gripper) is empty
+ * (0.0 meters away) CounterTop4(CounterTop) has been explored: it is empty
+ * (0.9 meters away) SinkBasin_28084e25(SinkBasin) is partially explored: it has Cup_26e78d79(Cup), and potentially other objects
+ * (7.8 meters away) Cabinet_bc977650(Cabinet) is unexplored: potentially has other objects on/in it
+ * (7.8 meters away) CounterTop3(CounterTop) has been fully explored: it has SoapBottle_0aa9ed0b(SoapBottle), and nothing else
+ * (7.8 meters away) Drawer_f530e642(Drawer) is unexplored: potentially has other objects on/in it
+ * (10.3 meters away) CounterTop5(CounterTop) has been fully explored: it has Pan_f348c8b4(Pan), and nothing else
+ * (10.4 meters away) Cabinet_2fee59ce(Cabinet) is unexplored: potentially has other objects on/in it
+ * (10.4 meters away) Cabinet_5c8637ba(Cabinet) is unexplored: potentially has other objects on/in it
+ * (10.8 meters away) Fridge_683c888d(Fridge) is unexplored: potentially has other objects on/in it
+ * (11.5 meters away) StoveBurner_58b674c4(StoveBurner) is unexplored: potentially has other objects on/in it
+ * (11.9 meters away) Cabinet_178a2f0f(Cabinet) is unexplored: potentially has other objects on/in it
+ * (11.9 meters away) Cabinet_8dc96e98(Cabinet) is unexplored: potentially has other objects on/in it
+ * (11.9 meters away) CounterTop2(CounterTop) has been explored: it is empty
+ * (22.0 meters away) CounterTop1(CounterTop) has been fully explored: it has Ladle_5881d727(Ladle), Potato_204aef67(Potato), Mug_0e746896(Mug), and nothing else
+
+[Object Knowledge]
+ * Cabinet_178a2f0f(Cabinet): closed,
+ * Cabinet_8dc96e98(Cabinet): closed,
+ * Cabinet_bc977650(Cabinet): closed,
+ * Cup_26e78d79(Cup) at SinkBasin_28084e25 clean,
+ * Drawer_f530e642(Drawer): closed,
+ * Fridge_683c888d(Fridge): closed,
+ * GarbageCan_ace47f8a(GarbageCan)
+ * Ladle_5881d727(Ladle) at CounterTop1
+ * Mug_0e746896(Mug) at CounterTop1 clean,
+ * Pan_f348c8b4(Pan) at CounterTop5 clean,
+ * Potato_204aef67(Potato) at CounterTop1: uncooked,
+ * SinkBasin_28084e25(SinkBasin)
+ * Sink_e57378e4(Sink)
+ * SoapBottle_0aa9ed0b(SoapBottle) at CounterTop3
+ * StoveBurner_1bea7495(StoveBurner)
+ * StoveBurner_58b674c4(StoveBurner)
+ * StoveBurner_70d61138(StoveBurner)
+ * StoveBurner_da949af1(StoveBurner)
+ * StoveKnob_5203e0e0(StoveKnob):turned off,
+ * StoveKnob_607dc719(StoveKnob):turned off,
+ * StoveKnob_6a0edf00(StoveKnob):turned off,
+ * StoveKnob_8a66ac87(StoveKnob):turned off,
+
+Note that each object has exactly one unique category. There is no multi-purpose tool in the environment. Assume the robot has perfect object recognition accuracy.
+
+[Previous Tasks]
+ * go to explore a/an countertop5: True
+ * go to explore a/an countertop2: True
+ * go to explore a/an countertop1: True
+ * go to explore a/an countertop3: True
+ * go to explore a/an countertop4: True
+
+[Action History]
+ * (time 11) motor action: move to countertop3 (purpose: IF the current task is to explore a/an <receptacle> AND the robot is not at the location of <receptacle> AND the robot's gripper is empty THEN choose motor action: move to <receptacle>.)
+ * (time 12) special action: done (purpose: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.)
+ * (time 13) attend to subtask: go to explore a/an CounterTop4 (purpose: IF the current task is to put things on the countertops away AND the robot's gripper is empty AND there are unexplored countertops THEN choose 'attend to subtask: go to explore a/an <unexplored_countertop>'.)
+ * (time 14) motor action: move to countertop4 (purpose: IF the current task is to explore a/an <receptacle> AND the robot is not at the location of <receptacle> AND the robot's gripper is empty THEN choose motor action: move to <receptacle>.)
+ * (time 15) special action: done (purpose: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.)
+
+[Existing Plan]
+ None
+
+[Extra Instructions]
+ None
+
+[Possible Options]
+ * attend to subtask: find a/an <object> (Apply anytime. End condition: the robot has found the object and has it in its gripper.)
+ * attend to subtask: go to explore a/an <receptacle> (Apply anytime. End condition: the robot has fully explored the receptacle.)
+ * attend to subtask: pick up and place a/an <object> in/on a/an <receptacle> (Apply anytime. End condition: the robot has successfully picked up the specified object and placed it in/on the specified receptacle, and the robot's gripper is empty.)
+ * attend to subtask: slice a/an <sliceable> (Apply anytime. End condition: the sliceable object is already sliced and the robot's gripper is holding a knife.)
+ * motor action: toggle on Toaster_8f6b9682
+ * motor action: toggle on CoffeeMachine_da3d7217
+ * motor action: move to <receptacle>
+ * special action: 'done'
+ * special action: 'quit'
+
+[Blacklisted Options]
+ * attend to subtask: put things on the countertops away
+
+Notes: 
+ * Some of the possible options are parametrized, you have to replace "<receptacle>" with the name or type of a receptacle object listed in the spatial knowledge, and replace "<object>" with the name or type of an object.
+ * Reuse existing subtasks as much as possible. You don't have to think about the preconditions of the subtasks. If they are on the list, you may assume they are applicable.
+ * Do not perform the 'done' action or the 'quit' unless you are absolutely certain the task has been completed or cannot be completed.
+ * Moving to a location that has already been explored will not lead to any new information.
+ * A container receptacle (e.g. Fridge, Cabinet) has to be opened to be fully explored.
+ * An object with a 'sliced' attribute is already fully sliced, and cannot be sliced further.
+
+You will approach the current situation step-by-step and suggest an option for the robot to take in the end.
+
+First, repeat the current task and list a few common strategies for approaching the specified task in the kitchen. Note that the strategies you listed should respect the robot's capabilities. For example, the robot cannot ask a human for help. Also list a set of goal conditions for the task.
+
+Then, write a detailed analysis of the current situation from the information provided by the robot. This includes but is not limited to:
+ * Any useful information you noticed from spatial or object knowledge
+ * Whether the past actions of the robot indicate part of the task is done or whether the robot is focusing on part of the task
+ * How relevant the existing plan is to the task
+
+After analyzing the situation, generate an analysis of the task given the current situation of the kitchen. Reflect on what needs to be done for the current task. Is part of the task already achieved? If so, explicitly explain which part of the provided information shows that part of the task is already achieved.
+
+Next, given the analysis above, generate a short plan for the robot to do next to complete the task. Keep it concise. The plan can be on a high level, each step does not have to correspond to a motor action. You may leave this blank or state "no further steps are required" if you believe the task is already achieved.
+
+The next step is to identify the relevant and useful options from the [Possible Options] section. For parametrized options, you should fill the variable placeholder with actual values. Analyze how each option can potentially contribute to the task. For "attend to subtask" options, evaluate their usefulness based on their end condition. Note that your evaluation has to be based on the current observation provided by the robot. Do not recommend an option that is useful in the future but not right now. Your evaluation should not contain any "if". You may recommend attending to a subtask even if the subtask is partially completed as long as the end condition of the subtask is useful for the current task. You should use your own common sense knowledge about kitchens to help your judgment, this includes but is not limited to frequent co-occurrences of objects, common habits in the kitchen, etc. but you should also take into account the information provided by the robot. Explain your reasoning process in detail. Do the evaluation for all possible options.
+
+After the evaluation, suggest exactly one option that the robot should select right now. Your suggested option has to be from the list above. It cannot be in the [Blacklisted Options]. You have to replace all the variables if the option you choose is parametrized. It has to take into account what immediate action will help the robot the most. If two options are equally preferable, prioritize higher-level actions. That is, choose to attend to subtasks over motor actions, and choose to attend to longer horizon subtasks over short horizon subtasks. Also briefly state the purpose of this choice. Refer to objects by their object name. Do not use pronouns such as "it".
+
+If you think all options that are not in the [Blacklisted Options] section are inappropriate for the robot, suggest the "special action: 'quit'" option instead of randomly picking an unrelated option. For the [Purpose] section just state "The task cannot be completed by the possible options".
+
+And finally, indicate your response is finished by putting an "[END]" header.
+
+
+================================================================================
+-----------
+ ASSISTANT
+-----------
+
+[Current Task]
+Put things on the countertops away.
+
+[Common Strategies for "put things on the countertops away"]
+ * Identify all objects on the countertops.
+ * Determine the appropriate storage location for each object.
+ * Pick up each object and move it to its storage location.
+ * Repeat until all objects on the countertops have been put away.
+
+[Goal Conditions]
+ * All countertops are empty.
+ * All objects previously on the countertops are now in their appropriate storage locations.
+
+[Current Situation Analysis]
+The robot has already explored all the countertops and found objects on CounterTop1, CounterTop3, and CounterTop5. The objects include a ladle, a potato, a mug, a soap bottle, and a pan. The robot's gripper is currently empty, which means it is ready to pick up objects. The robot has not yet explored the cabinets, drawers, or the fridge, which could be potential storage locations for the objects on the countertops. The robot has not yet started the task of putting things away.
+
+[Task Analysis]
+The task of putting things on the countertops away has not been started yet. The robot has completed the first step of identifying all objects on the countertops, but it has not yet determined the appropriate storage location for each object, nor has it started moving any objects.
+
+[Plan]
+Step1: Determine the appropriate storage location for each object.
+Step2: Pick up each object and move it to its storage location.
+Step3: Repeat until all objects on the countertops have been put away.
+
+[Option Evaluation]
+"attend to subtask: find a/an <object>": This option is not immediately useful because the robot has already identified all objects on the countertops.
+
+"attend to subtask: go to explore a/an <receptacle>": This option is useful because the robot needs to explore potential storage locations for the objects on the countertops.
+
+"attend to subtask: pick up and place a/an <object> in/on a/an <receptacle>": This option is useful because it directly contributes to the task of putting things away. However, the robot first needs to determine the appropriate storage location for each object.
+
+"attend to subtask: slice a/an <sliceable>": This option is not relevant to the current task.
+
+"motor action: toggle on Toaster_8f6b9682": This option is not relevant to the current task.
+
+"motor action: toggle on CoffeeMachine_da3d7217": This option is not relevant to the current task.
+
+"motor action: move to <receptacle>": This option could be useful for moving to a storage location, but the robot first needs to determine the appropriate storage location for each object.
+
+"special action: 'done'": This option is not appropriate because the task has not been completed.
+
+"special action: 'quit'": This option is not appropriate because the task can be completed with the available options.
+
+[Option Suggestion]
+"attend to subtask: go to explore a/an Cabinet_bc977650"
+
+[Purpose]
+The purpose of the suggested option is to explore potential storage locations for the objects on the countertops.
+
+[End]
+================================================================================
+------
+ USER
+------
+
+The robot wants to learn this action selection process as a production rule so that it can choose what action to take in the future on its own.
+
+Each production rule is composed of a set of preconditions and an effect, and has an "IF ... THEN ..." format. Basically it is saying if the preconditions are met, then choose a certain action. Note that the production rules can be parametrized. That is, it can have variable placeholders whose value will be assigned at runtime.
+
+The preconditions dictate whether the production is applicable, and has to be testable from the robot's knowledge (current task, current location, spatial knowledge, objects knowledge). The preconditions specify features from the observation that are important for the robot to make the decision.
+
+First, summarize the analysis above and identify the relevant information that is used for choosing the option "attend to subtask: go to explore a/an Cabinet_bc977650" based on the previous information. Pay special attention to [Current Situation Analysis] and [Purpose] sections. The selected information should show why other options (with different actions, or the same action on a different target) are not chosen. This includes both information from the robot's knowledge and your own knowledge about kitchens. This might include the absence of some condition, such as something not in the robot's observation or the robot not at a certain location. In that case, use the "NOT" keyword. Be sure to include the current task description if this action is task-oriented. You should include very specific information. Instead of saying "the task has been successfully completed", refer to the specific part of the information that shows the task has been completed. Do not include information about the blacklisted actions.
+
+Next, combine the information in the previous part and express in English, the decision-making production rule for this specific case. It should be in the form of "IF ... THEN choose attend to subtask: go to explore a/an Cabinet_bc977650". Where the IF part contains a conjunction of relevant knowledge. You may use the "AND" keyword in your production rule. You should include specific object names/types or location names for this rule.
+
+Afterward, for all the constants in the production rule (e.g. object types, location names, etc.), reflect on how each of them can be generalized. What specific feature of the instance leads to the decision? Does it has to be this specific object or can it be any object of the same category (or even more generalized category such as all objects/receptacles)? List all the components that can be generalized and what they should be generalized to. Your production should be applicable to all "put things on the countertops away" type of tasks. You may leave this part blank if you think the specific rule generated above is already sufficiently generalized.
+
+Then, generate the generalized production rule by replacing the specific values in the specialized rule with a variable placeholder "<variable_name>" according to the previous section. This generalized production should be applicable to other similar but different situations. Keep in mind that rules are not themselves alternative actions, but instead units of context-dependent knowledge that contribute to making a decision and taking an action. You should try to make the rule as generalized as possible, capturing the underlying decision-making principles. You should also make the production rule as unambiguous as possible.
+If you have identified no generalizable components in the previous part, just copy the specific rule as your generalized rule.
+
+Finally, for each variable placeholder in the generalized rule, explain which specific object in the specialized rule it corresponds to.
+
+Note that the production rule you generated should respect the [Extra Instructions] (if any). You can assume the extra instructions are always there so you don't have to put them in the preconditions.
+
+You may include a short note at the end to explain your response.
+
+Use the following format:
+[Relevant Information]
+ * information 1
+ * information 2
+ ...
+
+[Specific Rule]
+IF ... THEN ...
+
+[Generalizable Constants]
+ * object1 could be anything that ...
+ * ...
+
+[Generalized Rule]
+IF ... THEN ...
+
+[Correspondence]
+ * component 1 is ...
+ * ...
+
+(optional) Notes: ...
+================================================================================
+-----------
+ ASSISTANT
+-----------
+
+[Relevant Information]
+ * The current task is to put things on the countertops away.
+ * The robot has already explored all the countertops.
+ * The robot's gripper is currently empty.
+ * The robot has not yet explored the cabinets, drawers, or the fridge, which could be potential storage locations for the objects on the countertops.
+
+[Specific Rule]
+IF the current task is to put things on the countertops away AND the robot's gripper is empty AND the robot has already explored all the countertops AND there are unexplored cabinets THEN choose attend to subtask: go to explore a/an Cabinet_bc977650.
+
+[Generalizable Constants]
+ * Cabinet_bc977650 could be any unexplored cabinet.
+
+[Generalized Rule]
+IF the current task is to put things on the countertops away AND the robot's gripper is empty AND the robot has already explored all the countertops AND there are unexplored cabinets THEN choose attend to subtask: go to explore a/an <unexplored_cabinet>.
+
+[Correspondence]
+ * <unexplored_cabinet> is Cabinet_bc977650.
+
+Notes: This rule guides the robot to explore potential storage locations (in this case, cabinets) when the task is to put things away and the robot has already identified all objects on the countertops. This rule is based on the assumption that cabinets are a common storage location in kitchens.
+================================================================================
+
+<<<META INFO>>>
+total tokens: 5093 finished reason: stop model name: gpt-4-0613

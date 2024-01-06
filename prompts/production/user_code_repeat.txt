@@ -1,0 +1,50 @@
+The precondition of the code you generated did not pass the following test case:
+
+[Current Task] {task}
+
+[Current Location] {current_location}
+
+[Spatial Knowledge]
+{spatial_knowledge}
+
+[Object Knowledge]
+{object_knowledge}
+
+[Previous Tasks]
+{previous_tasks}
+
+[Expected Return of `{error_function}()`]
+{expected_return}
+
+[Your Code Return]
+{code_message}
+
+You are going to debug this step-by-step, and generate a new implementation for the production.
+
+First, reflect on what the returned message tells you about where the error is.
+
+Next, identify what the error is.
+Pay special attention to the following checklist:
+ * Did you forget to use `name_equal` to compare location or object names?
+ * Did you forget to set the variable bindings?
+ * Is there a problem with how you generate variable bindings?
+ * Is there a mismatch between your code and the provided interface? Is there something wrong with your preview response?
+
+Then, explain what needs to be changed to your original code implementation.
+
+Finally, generate a new implementation for the production above.
+
+Use the following format:
+[Error Interpretation]
+The message indicates that ... has failed.
+
+[Error attribution]
+The error is because ...
+
+[Things to change]
+The ... test should be ...
+
+[Python Implementation]
+```py
+<Your New Code Here>
+```

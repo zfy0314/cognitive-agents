@@ -1,0 +1,223 @@
+============================================================
+Agent: Alice    @ time   55
+------------------------------------------------------------
+Task:
+-----
+[slice a/an potato]
+
+Procedurals:
+------------
+{ 'productions._clear_receptacle_done': ( 'ClearReceptacleDone',
+                                          <productions._clear_receptacle_done.ClearReceptacleDone object at 0x14f53ad10>),
+  'productions._explore_cabinet': ( 'ExploreCabinet',
+                                    <productions._explore_cabinet.ExploreCabinet object at 0x14f539c60>),
+  'productions._explore_countertop': ( 'ExploreCountertop',
+                                       <productions._explore_countertop.ExploreCountertop object at 0x14f53bcd0>),
+  'productions._explore_receptacle': ( 'ExploreReceptacle',
+                                       <productions._explore_receptacle.ExploreReceptacle object at 0x14f53acb0>),
+  'productions._explore_receptacle2': ( 'ExploreReceptacle2',
+                                        <productions._explore_receptacle2.ExploreReceptacle2 object at 0x14f53a8c0>),
+  'productions._explore_receptacle3': ( 'ExploreReceptacle3',
+                                        <productions._explore_receptacle3.ExploreReceptacle3 object at 0x14f53a410>),
+  'productions._explore_receptacle4': ( 'ExploreReceptacle4',
+                                        <productions._explore_receptacle4.ExploreReceptacle4 object at 0x14f539a50>),
+  'productions._find_object': ( 'FindObject',
+                                <productions._find_object.FindObject object at 0x14f539f00>),
+  'productions._find_object2': ( 'FindObject2',
+                                 <productions._find_object2.FindObject2 object at 0x14f53af50>),
+  'productions._find_object3': ( 'FindObject3',
+                                 <productions._find_object3.FindObject3 object at 0x14f53aa40>),
+  'productions._find_object_in_gripper': ( 'FindObjectInGripper',
+                                           <productions._find_object_in_gripper.FindObjectInGripper object at 0x14f53b040>),
+  'productions._find_object_production': ( 'FindObjectProduction',
+                                           <productions._find_object_production.FindObjectProduction object at 0x14f53aef0>),
+  'productions._find_object_production2': ( 'FindObjectProduction2',
+                                            <productions._find_object_production2.FindObjectProduction2 object at 0x14f53b400>),
+  'productions._find_required_tool': ( 'FindRequiredTool',
+                                       <productions._find_required_tool.FindRequiredTool object at 0x14f53b250>),
+  'productions._find_sliceable_object': ( 'FindSliceableObject',
+                                          <productions._find_sliceable_object.FindSliceableObject object at 0x14f53ab30>),
+  'productions._move_to_pick_up_object': ( 'MoveToPickUpObject',
+                                           <productions._move_to_pick_up_object.MoveToPickUpObject object at 0x14f539c00>),
+  'productions._move_to_slice_object': ( 'MoveToSliceObject',
+                                         <productions._move_to_slice_object.MoveToSliceObject object at 0x14f539bd0>),
+  'productions._move_to_target_receptacle': ( 'MoveToTargetReceptacle',
+                                              <productions._move_to_target_receptacle.MoveToTargetReceptacle object at 0x14f539ea0>),
+  'productions._open_receptacle': ( 'OpenReceptacle',
+                                    <productions._open_receptacle.OpenReceptacle object at 0x14f53aad0>),
+  'productions._open_receptacle_before_placing': ( 'OpenReceptacleBeforePlacing',
+                                                   <productions._open_receptacle_before_placing.OpenReceptacleBeforePlacing object at 0x14f53be50>),
+  'productions._pick_up_object': ( 'PickUpObject',
+                                   <productions._pick_up_object.PickUpObject object at 0x14f53a950>),
+  'productions._place_object_in_receptacle': ( 'PlaceObjectInReceptacle',
+                                               <productions._place_object_in_receptacle.PlaceObjectInReceptacle object at 0x14f53a800>),
+  'productions._place_object_in_receptacle2': ( 'PlaceObjectInReceptacle2',
+                                                <productions._place_object_in_receptacle2.PlaceObjectInReceptacle2 object at 0x14f539c90>),
+  'productions._put_away_objects': ( 'PutAwayObjects',
+                                     <productions._put_away_objects.PutAwayObjects object at 0x14f53a050>),
+  'productions._slice_already_sliced_object': ( 'SliceAlreadySlicedObject',
+                                                <productions._slice_already_sliced_object.SliceAlreadySlicedObject object at 0x14f53b7f0>),
+  'productions._slice_object': ( 'SliceObject',
+                                 <productions._slice_object.SliceObject object at 0x14f53a740>),
+  'productions._slice_object2': ( 'SliceObject2',
+                                  <productions._slice_object2.SliceObject2 object at 0x14f53b0d0>)}
+
+Declaratives:
+-------------
+Location History:
+ * Robot at Cabinet_63381269 from time 0 to 4
+ * Robot at Cabinet_4faabc6f from time 4 to 7
+ * Robot at Drawer_121fdf6f from time 7 to 7
+ * Robot at CounterTop1 from time 7 to 10
+ * Robot at Drawer_121fdf6f from time 10 to 15
+ * Robot at Drawer_b23191f9 from time 15 to 18
+ * Robot at Cabinet_1b680bcf from time 18 to 24
+ * Robot at Cabinet_b92ee11c from time 24 to 27
+ * Robot at Drawer_e33d0cbf from time 27 to 30
+ * Robot at Drawer_eb279e69 from time 30 to 33
+ * Robot at CounterTop2 from time 33 to 34
+ * Robot at Cabinet_2b3534ad from time 34 to 38
+ * Robot at Cabinet_70f7d173 from time 38 to 42
+ * Robot at StoveBurner_71ec8a3a from time 42 to 45
+ * Robot at CounterTop5 from time 45 to 47
+ * Robot at SinkBasin_8b626e24 from time 47 to 51
+ * Robot at CounterTop3 from time 51 to 55
+ * Robot at CounterTop1 from time 55 to 56
+
+Spatial Knowledge:
+ * (0.0 meters away) RobotGripper(Gripper) has Knife_9a8a6eda(Knife), and nothing else
+ * (0.0 meters away) Cabinet_4faabc6f(Cabinet) has been explored: it is empty
+ * (0.0 meters away) Cabinet_63381269(Cabinet) has been explored: it is empty
+ * (0.0 meters away) CounterTop1(CounterTop) has been fully explored: it has Potato_6_Slice_8(PotatoSliced), Potato_6_Slice_7(PotatoSliced), Potato_6_Slice_6(PotatoSliced), Potato_6_Slice_5(PotatoSliced), Potato_6_Slice_4(PotatoSliced), Potato_6_Slice_3(PotatoSliced), Potato_6_Slice_2(PotatoSliced), Potato_6_Slice_1(PotatoSliced), Plate_dde6ca4d(Plate), Spatula_055867d4(Spatula), and nothing else
+ * (0.0 meters away) Drawer_121fdf6f(Drawer) has been explored: it is empty
+ * (0.0 meters away) Drawer_b23191f9(Drawer) has been explored: it is empty
+ * (1.0 meters away) Cabinet_1b680bcf(Cabinet) has been explored: it is empty
+ * (1.0 meters away) Cabinet_b92ee11c(Cabinet) has been fully explored: it has Pot_06043c8f(Pot), and nothing else
+ * (1.0 meters away) Drawer_e33d0cbf(Drawer) has been explored: it is empty
+ * (1.0 meters away) Drawer_eb279e69(Drawer) has been explored: it is empty
+ * (1.2 meters away) Fridge_b4ec6389(Fridge) is unexplored: potentially has other objects on/in it
+ * (2.1 meters away) CounterTop2(CounterTop) has been explored: it is empty
+ * (13.0 meters away) CounterTop4(CounterTop) is unexplored: potentially has other objects on/in it
+ * (21.1 meters away) CounterTop3(CounterTop) has been fully explored: it has Pan_eb61f4ff(Pan), Apple_3ae85dc5(Apple), Bowl_fbca9a50(Bowl), Bread_45382c17(Bread), Cup_d480b71b(Cup), Spoon_c01237ec(Spoon), and nothing else
+ * (22.3 meters away) Cabinet_2b3534ad(Cabinet) has been explored: it is empty
+ * (22.3 meters away) Cabinet_70f7d173(Cabinet) has been explored: it is empty
+ * (22.7 meters away) StoveBurner_71ec8a3a(StoveBurner) has been explored: it is empty
+ * (23.0 meters away) SinkBasin_8b626e24(SinkBasin) has been fully explored: it has Lettuce_a7611dd3(Lettuce), Tomato_90b0ac7d(Tomato), Mug_a33b2de9(Mug), and nothing else
+ * (23.1 meters away) CounterTop5(CounterTop) has been fully explored: it has Fork_3f9ae4b5(Fork), ButterKnife_9c168b7e(ButterKnife), and nothing else
+
+Object Knowledge:
+ * Apple_3ae85dc5(Apple) at CounterTop3
+ * Bowl_fbca9a50(Bowl) at CounterTop3 clean,
+ * Bread_45382c17(Bread) at CounterTop3
+ * ButterKnife_9c168b7e(ButterKnife) at CounterTop5
+ * Cabinet_1b680bcf(Cabinet): opened,
+ * Cabinet_2b3534ad(Cabinet): opened,
+ * Cabinet_4faabc6f(Cabinet): opened,
+ * Cabinet_63381269(Cabinet): opened,
+ * Cabinet_70f7d173(Cabinet): opened,
+ * Cabinet_b92ee11c(Cabinet): opened,
+ * Cup_d480b71b(Cup) at CounterTop3 clean,
+ * Drawer_121fdf6f(Drawer): opened,
+ * Drawer_b23191f9(Drawer): opened,
+ * Drawer_e33d0cbf(Drawer): opened,
+ * Drawer_eb279e69(Drawer): opened,
+ * Faucet_ac648bfb(Faucet):turned off,
+ * Fork_3f9ae4b5(Fork) at CounterTop5
+ * Fridge_b4ec6389(Fridge): closed,
+ * GarbageCan_2d9a63be(GarbageCan)
+ * Knife_9a8a6eda(Knife) at RobotGripper
+ * Lettuce_a7611dd3(Lettuce) at SinkBasin_8b626e24
+ * Mug_a33b2de9(Mug) at SinkBasin_8b626e24 clean,
+ * Pan_eb61f4ff(Pan) at CounterTop3 clean,
+ * Plate_dde6ca4d(Plate) at CounterTop1 clean,
+ * Pot_06043c8f(Pot) at Cabinet_b92ee11c clean,
+ * Potato_6_Slice_1(PotatoSliced) at CounterTop1: uncooked, sliced,
+ * Potato_6_Slice_2(PotatoSliced) at CounterTop1: uncooked, sliced,
+ * Potato_6_Slice_3(PotatoSliced) at CounterTop1: uncooked, sliced,
+ * Potato_6_Slice_4(PotatoSliced) at CounterTop1: uncooked, sliced,
+ * Potato_6_Slice_5(PotatoSliced) at CounterTop1: uncooked, sliced,
+ * Potato_6_Slice_6(PotatoSliced) at CounterTop1: uncooked, sliced,
+ * Potato_6_Slice_7(PotatoSliced) at CounterTop1: uncooked, sliced,
+ * Potato_6_Slice_8(PotatoSliced) at CounterTop1: uncooked, sliced,
+ * SinkBasin_8b626e24(SinkBasin)
+ * Sink_2ca389fe(Sink)
+ * Spatula_055867d4(Spatula) at CounterTop1
+ * Spoon_c01237ec(Spoon) at CounterTop3
+ * Stool_142073c8(Stool)
+ * StoveBurner_71ec8a3a(StoveBurner)
+ * StoveBurner_c90d0c78(StoveBurner)
+ * StoveBurner_daf23be1(StoveBurner)
+ * StoveBurner_fdc051e1(StoveBurner)
+ * StoveKnob_26e813b7(StoveKnob):turned off,
+ * StoveKnob_32d7418d(StoveKnob):turned off,
+ * StoveKnob_621f38a2(StoveKnob):turned off,
+ * StoveKnob_d159955e(StoveKnob):turned off,
+ * Tomato_90b0ac7d(Tomato) at SinkBasin_8b626e24
+ * Window_587c5f9e(Window)
+ * Window_ca369052(Window)
+
+Extra Instrucitons:
+[]
+------------------------------------------------------------
+History:
+--------
+ * (time 1) attend to subtask: find a/an knife (justification: IF the current task is to slice a/an <sliceable> AND the <sliceable> is located on a countertop AND the robot's gripper is empty AND there is no <required_tool> in the robot's spatial knowledge THEN choose 'attend to subtask: find a/an <required_tool>'.))
+ * (time 2) motor action: open Cabinet_63381269 (justification: IF the current task is to find a/an <object> AND the robot is in front of a closed <receptacle> AND the robot's gripper is empty THEN choose motor action: open <receptacle>.))
+ * (time 3) motor action: move to a/an Cabinet_4faabc6f (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there is an unexplored <receptacle> that is commonly associated with the <object> THEN choose motor action: move to <receptacle>.))
+ * (time 4) motor action: move to a/an Cabinet_4faabc6f (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there is an unexplored <receptacle> that is commonly associated with the <object> THEN choose motor action: move to <receptacle>.))
+ * (time 4) motor action: open Cabinet_4faabc6f (justification: IF the current task is to find a/an <object> AND the robot is in front of a closed <receptacle> AND the robot's gripper is empty THEN choose motor action: open <receptacle>.))
+ * (time 5) motor action: move to a/an Drawer_121fdf6f (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there is an unexplored <receptacle> that is commonly associated with the <object> THEN choose motor action: move to <receptacle>.))
+ * (time 6) attend to subtask: go to explore a/an CounterTop1 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 7) motor action: move to countertop1 (justification: IF the current task is to explore a/an <receptacle> AND the <receptacle> is not at the current location AND the robot's gripper is empty THEN choose 'motor action: move to <receptacle>'.))
+ * (time 8) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 9) attend to subtask: go to explore a/an Drawer_121fdf6f (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 10) motor action: move to drawer_121fdf6f (justification: IF the current task is to explore a/an <receptacle> AND the <receptacle> is not at the current location AND the robot's gripper is empty THEN choose 'motor action: move to <receptacle>'.))
+ * (time 11) motor action: open drawer_121fdf6f (justification: IF the current task is to explore a <receptacle> AND the robot is at the location of the <receptacle> AND the <receptacle> is closed and unexplored AND the robot's gripper is empty THEN choose 'motor action: open <receptacle>'.))
+ * (time 12) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 13) attend to subtask: go to explore a/an Drawer_b23191f9 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 14) motor action: move to drawer_b23191f9 (justification: IF the current task is to explore a/an <receptacle> AND the robot is not at the location of <receptacle> AND the robot's gripper is empty THEN choose motor action: move to <receptacle>.))
+ * (time 15) motor action: open drawer_b23191f9 (justification: IF the current task is to explore a <receptacle> AND the robot is at the location of the <receptacle> AND the <receptacle> is closed and unexplored AND the robot's gripper is empty THEN choose 'motor action: open <receptacle>'.))
+ * (time 16) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 17) motor action: move to a/an Cabinet_1b680bcf (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there is an unexplored <receptacle> that is commonly associated with the <object> THEN choose motor action: move to <receptacle>.))
+ * (time 18) motor action: move to a/an Cabinet_1b680bcf (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there is an unexplored <receptacle> that is commonly associated with the <object> THEN choose motor action: move to <receptacle>.))
+ * (time 18) attend to subtask: go to explore a/an Cabinet_1b680bcf (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 19) motor action: open cabinet_1b680bcf (justification: IF the current task is to explore a <receptacle> AND the robot is at the location of the <receptacle> AND the <receptacle> is closed and unexplored AND the robot's gripper is empty THEN choose 'motor action: open <receptacle>'.))
+ * (time 20) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 21) attend to subtask: go to explore a/an Cabinet_b92ee11c (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 22) motor action: move to cabinet_b92ee11c (justification: IF the current task is to explore a/an <receptacle> AND the robot is not at the location of <receptacle> AND the robot's gripper is empty THEN choose motor action: move to <receptacle>.))
+ * (time 23) motor action: open cabinet_b92ee11c (justification: IF the current task is to explore a <receptacle> AND the robot is at the location of the <receptacle> AND the <receptacle> is closed and unexplored AND the robot's gripper is empty THEN choose 'motor action: open <receptacle>'.))
+ * (time 24) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 25) attend to subtask: go to explore a/an Drawer_e33d0cbf (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 26) motor action: move to drawer_e33d0cbf (justification: IF the current task is to explore a/an <receptacle> AND the robot is not at the location of <receptacle> AND the robot's gripper is empty THEN choose motor action: move to <receptacle>.))
+ * (time 27) motor action: open drawer_e33d0cbf (justification: IF the current task is to explore a <receptacle> AND the robot is at the location of the <receptacle> AND the <receptacle> is closed and unexplored AND the robot's gripper is empty THEN choose 'motor action: open <receptacle>'.))
+ * (time 28) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 29) motor action: move to a/an Drawer_eb279e69 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there is an unexplored <receptacle> that is commonly associated with the <object> THEN choose motor action: move to <receptacle>.))
+ * (time 30) motor action: open Drawer_eb279e69 (justification: IF the current task is to find a/an <object> AND the robot is in front of a closed <receptacle> AND the robot's gripper is empty THEN choose motor action: open <receptacle>.))
+ * (time 31) attend to subtask: go to explore a/an CounterTop2 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 32) motor action: move to countertop2 (justification: IF the current task is to explore a/an <receptacle> AND the robot is not at the location of <receptacle> AND the robot's gripper is empty THEN choose motor action: move to <receptacle>.))
+ * (time 33) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 34) motor action: move to a/an Cabinet_2b3534ad (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there is an unexplored <receptacle> that is commonly associated with the <object> THEN choose motor action: move to <receptacle>.))
+ * (time 35) motor action: open Cabinet_2b3534ad (justification: IF the current task is to find a/an <object> AND the robot is in front of a closed <receptacle> AND the robot's gripper is empty THEN choose motor action: open <receptacle>.))
+ * (time 36) attend to subtask: go to explore a/an Cabinet_70f7d173 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 37) motor action: move to cabinet_70f7d173 (justification: IF the current task is to explore a/an <receptacle> AND the robot is not at the location of <receptacle> AND the robot's gripper is empty THEN choose motor action: move to <receptacle>.))
+ * (time 38) motor action: open cabinet_70f7d173 (justification: IF the current task is to explore a <receptacle> AND the robot is at the location of the <receptacle> AND the <receptacle> is closed and unexplored AND the robot's gripper is empty THEN choose 'motor action: open <receptacle>'.))
+ * (time 39) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 40) attend to subtask: go to explore a/an StoveBurner_71ec8a3a (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 41) motor action: move to stoveburner_71ec8a3a (justification: IF the current task is to explore a/an <receptacle> AND the robot is not at the location of <receptacle> AND the robot's gripper is empty THEN choose motor action: move to <receptacle>.))
+ * (time 42) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 43) motor action: open StoveBurner_71ec8a3a (justification: IF the current task is to find a/an <object> AND the robot is in front of a closed <receptacle> AND the robot's gripper is empty THEN choose motor action: open <receptacle>.))
+ * (time 43) attend to subtask: go to explore a/an CounterTop5 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 44) motor action: move to countertop5 (justification: IF the current task is to explore a/an <receptacle> AND the robot is not at the location of <receptacle> AND the robot's gripper is empty THEN choose motor action: move to <receptacle>.))
+ * (time 45) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 46) attend to subtask: go to explore a/an SinkBasin_8b626e24 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 47) motor action: move to sinkbasin_8b626e24 (justification: IF the current task is to explore a/an <receptacle> AND the <receptacle> is not at the current location AND the robot's gripper is empty THEN choose 'motor action: move to <receptacle>'.))
+ * (time 48) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 49) motor action: open SinkBasin_8b626e24 (justification: IF the current task is to find a/an <object> AND the robot is in front of a closed <receptacle> AND the robot's gripper is empty THEN choose motor action: open <receptacle>.))
+ * (time 49) attend to subtask: go to explore a/an CounterTop3 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 50) motor action: move to countertop3 (justification: IF the current task is to explore a/an <receptacle> AND the robot is not at the location of <receptacle> AND the robot's gripper is empty THEN choose motor action: move to <receptacle>.))
+ * (time 51) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 52) motor action: pick up knife (justification: IF the current task is to find a/an <object> AND the <object> is located in a/an <receptacle> AND the robot is in front of the <receptacle> AND the robot's gripper is empty THEN choose motor action: pick up <object>.))
+ * (time 53) special action: done (justification: IF the current task is to find a/an <object> AND the robot's gripper has <object> THEN choose special action: 'done'.))
+ * (time 54) motor action: move to CounterTop1 (justification: IF the current task is to slice a/an <object> AND the robot is holding a knife AND the <object> is not at the robot's current location THEN choose motor action: move to <object_location>.))
+ * (time 55) motor action: slice potato (justification: IF the current task is to slice a/an <sliceable> AND the robot's gripper is holding a knife AND the <sliceable> is located on the countertop in front of the robot THEN choose motor action: slice <sliceable>.))
+============================================================

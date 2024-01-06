@@ -1,0 +1,123 @@
+============================================================
+Agent: Alice    @ time    8
+------------------------------------------------------------
+Task:
+-----
+[find a/an egg]
+
+Procedurals:
+------------
+{ 'productions._clear_receptacle_done': ( 'ClearReceptacleDone',
+                                          <productions._clear_receptacle_done.ClearReceptacleDone object at 0x1689810f0>),
+  'productions._explore_cabinet': ( 'ExploreCabinet',
+                                    <productions._explore_cabinet.ExploreCabinet object at 0x168980c70>),
+  'productions._explore_countertop': ( 'ExploreCountertop',
+                                       <productions._explore_countertop.ExploreCountertop object at 0x168980b80>),
+  'productions._explore_receptacle': ( 'ExploreReceptacle',
+                                       <productions._explore_receptacle.ExploreReceptacle object at 0x1689800d0>),
+  'productions._explore_receptacle2': ( 'ExploreReceptacle2',
+                                        <productions._explore_receptacle2.ExploreReceptacle2 object at 0x1689801f0>),
+  'productions._explore_receptacle3': ( 'ExploreReceptacle3',
+                                        <productions._explore_receptacle3.ExploreReceptacle3 object at 0x168980e20>),
+  'productions._explore_receptacle4': ( 'ExploreReceptacle4',
+                                        <productions._explore_receptacle4.ExploreReceptacle4 object at 0x168980cd0>),
+  'productions._find_object': ( 'FindObject',
+                                <productions._find_object.FindObject object at 0x1689807c0>),
+  'productions._find_object2': ( 'FindObject2',
+                                 <productions._find_object2.FindObject2 object at 0x168980ee0>),
+  'productions._find_object3': ( 'FindObject3',
+                                 <productions._find_object3.FindObject3 object at 0x168980220>),
+  'productions._find_object_in_gripper': ( 'FindObjectInGripper',
+                                           <productions._find_object_in_gripper.FindObjectInGripper object at 0x1689808e0>),
+  'productions._find_object_production': ( 'FindObjectProduction',
+                                           <productions._find_object_production.FindObjectProduction object at 0x168980e50>),
+  'productions._find_object_production2': ( 'FindObjectProduction2',
+                                            <productions._find_object_production2.FindObjectProduction2 object at 0x168980b20>),
+  'productions._find_required_tool': ( 'FindRequiredTool',
+                                       <productions._find_required_tool.FindRequiredTool object at 0x168980d30>),
+  'productions._find_sliceable_object': ( 'FindSliceableObject',
+                                          <productions._find_sliceable_object.FindSliceableObject object at 0x168980f10>),
+  'productions._move_to_pick_up_object': ( 'MoveToPickUpObject',
+                                           <productions._move_to_pick_up_object.MoveToPickUpObject object at 0x168980a60>),
+  'productions._move_to_slice_object': ( 'MoveToSliceObject',
+                                         <productions._move_to_slice_object.MoveToSliceObject object at 0x168980820>),
+  'productions._move_to_target_receptacle': ( 'MoveToTargetReceptacle',
+                                              <productions._move_to_target_receptacle.MoveToTargetReceptacle object at 0x168980a90>),
+  'productions._open_receptacle': ( 'OpenReceptacle',
+                                    <productions._open_receptacle.OpenReceptacle object at 0x168980dc0>),
+  'productions._open_receptacle_before_placing': ( 'OpenReceptacleBeforePlacing',
+                                                   <productions._open_receptacle_before_placing.OpenReceptacleBeforePlacing object at 0x1689802e0>),
+  'productions._pick_up_object': ( 'PickUpObject',
+                                   <productions._pick_up_object.PickUpObject object at 0x168980910>),
+  'productions._place_object_in_receptacle': ( 'PlaceObjectInReceptacle',
+                                               <productions._place_object_in_receptacle.PlaceObjectInReceptacle object at 0x168980760>),
+  'productions._place_object_in_receptacle2': ( 'PlaceObjectInReceptacle2',
+                                                <productions._place_object_in_receptacle2.PlaceObjectInReceptacle2 object at 0x1689809a0>),
+  'productions._put_away_objects': ( 'PutAwayObjects',
+                                     <productions._put_away_objects.PutAwayObjects object at 0x168980250>),
+  'productions._slice_already_sliced_object': ( 'SliceAlreadySlicedObject',
+                                                <productions._slice_already_sliced_object.SliceAlreadySlicedObject object at 0x168980fa0>),
+  'productions._slice_object': ( 'SliceObject',
+                                 <productions._slice_object.SliceObject object at 0x168980790>),
+  'productions._slice_object2': ( 'SliceObject2',
+                                  <productions._slice_object2.SliceObject2 object at 0x168980fd0>)}
+
+Declaratives:
+-------------
+Location History:
+ * Robot at Cabinet_1b680bcf from time 0 to 5
+ * Robot at Fridge_b4ec6389 from time 5 to 10
+
+Spatial Knowledge:
+ * (0.0 meters away) RobotGripper(Gripper) has Egg_45bb54d2(Egg), and nothing else
+ * (0.0 meters away) Fridge_b4ec6389(Fridge) has been explored: it is empty
+ * (1.2 meters away) Cabinet_4faabc6f(Cabinet) is unexplored: potentially has other objects on/in it
+ * (1.2 meters away) Cabinet_63381269(Cabinet) is unexplored: potentially has other objects on/in it
+ * (1.2 meters away) CounterTop1(CounterTop) is partially explored: it has Apple_3ae85dc5(Apple), Lettuce_a7611dd3(Lettuce), Plate_dde6ca4d(Plate), Potato_208e6ea2(Potato), Tomato_90b0ac7d(Tomato), and potentially other objects
+ * (1.2 meters away) Drawer_121fdf6f(Drawer) is unexplored: potentially has other objects on/in it
+ * (1.2 meters away) Drawer_b23191f9(Drawer) is unexplored: potentially has other objects on/in it
+ * (2.2 meters away) Cabinet_1b680bcf(Cabinet) has been explored: it is empty
+ * (2.2 meters away) Cabinet_b92ee11c(Cabinet) is unexplored: potentially has other objects on/in it
+ * (2.2 meters away) Drawer_e33d0cbf(Drawer) is unexplored: potentially has other objects on/in it
+ * (2.2 meters away) Drawer_eb279e69(Drawer) is unexplored: potentially has other objects on/in it
+ * (3.3 meters away) CounterTop2(CounterTop) is unexplored: potentially has other objects on/in it
+ * (12.0 meters away) CounterTop4(CounterTop) is unexplored: potentially has other objects on/in it
+ * (21.7 meters away) CounterTop3(CounterTop) is unexplored: potentially has other objects on/in it
+ * (21.8 meters away) SinkBasin_8b626e24(SinkBasin) is unexplored: potentially has other objects on/in it
+ * (22.3 meters away) Cabinet_2b3534ad(Cabinet) is unexplored: potentially has other objects on/in it
+ * (22.3 meters away) Cabinet_70f7d173(Cabinet) is unexplored: potentially has other objects on/in it
+ * (22.7 meters away) StoveBurner_71ec8a3a(StoveBurner) is unexplored: potentially has other objects on/in it
+ * (23.5 meters away) CounterTop5(CounterTop) is unexplored: potentially has other objects on/in it
+
+Object Knowledge:
+ * Apple_3ae85dc5(Apple) at CounterTop1
+ * Cabinet_1b680bcf(Cabinet): opened,
+ * Cabinet_4faabc6f(Cabinet): closed,
+ * Cabinet_63381269(Cabinet): closed,
+ * Cabinet_b92ee11c(Cabinet): closed,
+ * Drawer_121fdf6f(Drawer): closed,
+ * Drawer_b23191f9(Drawer): closed,
+ * Drawer_e33d0cbf(Drawer): closed,
+ * Drawer_eb279e69(Drawer): closed,
+ * Egg_45bb54d2(Egg) at RobotGripper
+ * Fridge_b4ec6389(Fridge): opened,
+ * Lettuce_a7611dd3(Lettuce) at CounterTop1
+ * Plate_dde6ca4d(Plate) at CounterTop1 clean,
+ * Potato_208e6ea2(Potato) at CounterTop1: uncooked,
+ * Stool_142073c8(Stool)
+ * Tomato_90b0ac7d(Tomato) at CounterTop1
+
+Extra Instrucitons:
+[]
+------------------------------------------------------------
+History:
+--------
+ * (time 1) attend to subtask: go to explore a/an Cabinet_1b680bcf (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 2) motor action: open cabinet_1b680bcf (justification: IF the current task is to explore a <receptacle> AND the robot is at the location of the <receptacle> AND the <receptacle> is closed and unexplored AND the robot's gripper is empty THEN choose 'motor action: open <receptacle>'.))
+ * (time 3) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 4) motor action: move to a/an Fridge_b4ec6389 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there is an unexplored <receptacle> that is commonly associated with the <object> THEN choose motor action: move to <receptacle>.))
+ * (time 5) attend to subtask: go to explore a/an Fridge_b4ec6389 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 6) motor action: open fridge_b4ec6389 (justification: IF the current task is to explore a <receptacle> AND the robot is at the location of the <receptacle> AND the <receptacle> is closed and unexplored AND the robot's gripper is empty THEN choose 'motor action: open <receptacle>'.))
+ * (time 7) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 8) motor action: pick up egg (justification: IF the current task is to find a/an <object> AND the <object> is located in a/an <receptacle> AND the robot is in front of the <receptacle> AND the robot's gripper is empty THEN choose motor action: pick up <object>.))
+============================================================

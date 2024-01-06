@@ -1,0 +1,17 @@
+You are developing a household robot that runs the SOAR cognitive architecture to do some kitchen tasks. 
+
+As a reminder, SOAR agents have a set of production rules that encodes what the robot should do in different scenarios. All productions are in the form of "IF ... THEN ..." where the IF part dictates when the production rule is applicable, and the THEN part proposes the action. All proposed action has to have one of the following prefixes: "motor action: ...", "attend to subtask: ...", "special action: ...". The proposed action should be a single, atomic action (i.e. no "if" allowed in the THEN part of the production). Keep in mind that rules are not themselves alternative actions, but instead units of context-dependent knowledge that contribute to making a decision and taking an action.
+
+Hardware-wise the robot has an onboard camera that can perform object recognition. The camera is the robot's only perceptual sensor. The robot also has wheels to navigate around the kitchen. Additionally, it also has a gripper that can pick things up and put them down, open/close containers, or slice objects with a knife. It also knows how to turn on and off appliances such as a toaster.
+
+Note that the robot only has one gripper. So if its gripper is occupied and the robot wants to pick up something else it would have to place the object currently in the gripper on some other receptacle first before picking up the new object. If objects are stacked (e.g. an apple is on a plate), then the robot can choose to pick the bottom object (i.e. plate) to have all of the stacked objects in its gripper.
+
+Also, the gripper has limited range so if the robot wants to pick up some object it has to be in the same location of the object. Similarly, if the robot wants to put down some object in its gripper to a  receptacle, the robot has to be at the location of the target receptacle.
+
+If the robot is holding a knife in its gripper and there is a sliceable object (e.g. a tomato) in its field of view, then the robot can slice that object with the knife. The robot can also crack an egg with a knife. However, if an object already has a "sliced" attribute in its [Object Knowledge], it means the object cannot be further sliced by the robot, and should be considered as already sliced.
+
+Additionally, it can also perform two special actions to indicate termination:
+ * 'done': From the observations and past information the robot is certain that the task has been successfully completed
+ * 'quit': From the observations and past information the robot is certain that the task cannot be completed given the current environment
+
+The robot has some learning capabilities that allow it to generate production rules from its past experience of interacting with the kitchen. However, the automatically generated production rules might be overly constrained, and/or not cover all cases. So your job is to analyze the existing production rules and improve them. However, do not suggest any changes to a production rule unless you are certain the new version is a reasonable generalization.

@@ -1,0 +1,5 @@
+You are developing a household robot that runs the SOAR cognitive architecture to do some kitchen tasks. 
+
+As a reminder, SOAR agents have a set of production rules that encodes what the robot should do in different scenarios. All productions are in the form of "IF ... THEN ..." where the IF part dictates when the production rule is applicable, and the THEN part propose the action. All proposed action has to have one of the following prefixes: "motor action: ...", "attend to subtask: ...", "special action: ...". Keep in mind that rules are not themselves alternative actions, but instead units of context-dependent knowledge that contribute to making a decision and taking an action.
+
+The robot has some learning capabilities that allow it to generate production rules from its past experience of interacting with the kitchen. However, the automatically generated production rules might be overly constrained, and/or not cover all cases. So your job is to analyze the existing production rules and improve them.

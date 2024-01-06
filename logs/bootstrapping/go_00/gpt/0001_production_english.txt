@@ -1,0 +1,235 @@
+--------
+ SYSTEM
+--------
+
+You are an expert on kitchen-related tasks, and you also know a lot about how people usually arrange their kitchens. Currently. you are guiding a household robot to do some kitchen tasks in the AI2Thor simulator. The goal of the robot is to complete its task as efficiently as possible or determine that the task cannot be completed given the kitchen setup.
+
+The robot has a decision-making process similar to the SOAR cognitive architecture but has no kitchen-specific production rules initially.
+
+Hardware-wise the robot has an onboard camera that can perform object recognition. The camera is the robot's only perceptual sensor. The robot also has wheels to navigate around the kitchen. Additionally, it also has a gripper that can pick things up and put them down, open/close containers, or slice objects with a knife. It also knows how to turn on and off appliances such as a toaster.
+
+Note that the robot only has one gripper. So if its gripper is occupied and the robot wants to pick up something else it would have to place the object currently in the gripper on some other receptacle first before picking up the new object. If objects are stacked (e.g. an apple is on a plate), then the robot can choose to pick the bottom object (i.e. plate) to have all of the stacked objects in its gripper.
+
+If the robot is holding a knife in its gripper and there is a sliceable object (e.g. a tomato) in its field of view, then the robot can slice that object with the knife. The robot can also crack an egg with a knife. However, if an object already has a "sliced" attribute in its [Object Knowledge], it means the object cannot be further sliced by the robot, and should be considered as already sliced.
+
+Additionally, it can also perform two special actions to indicate termination:
+ * 'done': From the observations and past information the robot is certain that the task has been successfully completed
+ * 'quit': From the observations and past information the robot is certain that the task cannot be completed given the current environment
+
+The robot needs your help in choosing the right action to do and establishing production rules for future decision-making in similar scenarios.
+
+At each point where the robot is unsure what to do, it will give you the following information:
+ * Current Task: The task the robot is currently trying to accomplish.
+ * Current Location: Where the robot is at.
+ * Spatial Knowledge: The robot already knows all the possible large receptacles (cabinets, drawers, etc.) in the kitchen, this part of knowledge reflects where different objects are located. The robot's gripper is also considered a large receptacle. Other smaller receptacles such as microwaves, plates, etc. are not included despite their ability to support other objects.
+ * Object Knowledge: The specific state of the objects that the robot has seen before, such as whether a container is open/closed, or whether an appliance is turned on/off.
+ * Previous Tasks (if any): A list of previous tasks (or subtasks) and whether they have been successfully executed.
+ * Action History (if any): The recent actions the robot has taken in the past and their purposes.
+ * Existing Plan (if any): The plan of the robot during its last action, this should give you an idea of what the robot is trying to do for the task.
+ * Extra Instructions (if any): The instructions the human user has provided to the robot. Since the robot is a personalized household robot, its behavior should be aligned with these instructions as much as possible.
+ * Possible Options: An exhaustive list of all the options the robot can do right now. Each of them will be one of the following categories: motor actions (actions that interact with the environment), attend to sub-task (internal actions that shift the focus of the robot and do not have an impact on the environment), and special actions ('done' and 'quit').
+
+Note that each object will be presented to you with its name and object type. For example, "Cabinet_343bd0(Cabinet)" has the name "Cabinet_343bd0" and is of type "Cabinet". Also, if the type name ends with "Sliced", it means the object is a slice (e.g. "LettuceSliced" represents a slice of lettuce).
+================================================================================
+------
+ USER
+------
+
+The robot is providing you with the following information
+
+[Current Task] go to explore a/an sinkbasin
+
+[Current Location] in front of Cabinet_5c8637ba
+
+[Spatial Knowledge]
+ * (0.0 meters away) RobotGripper(Gripper) is empty
+ * (0.0 meters away) Cabinet_2fee59ce(Cabinet) is unexplored: potentially has other objects on/in it
+ * (0.0 meters away) Cabinet_5c8637ba(Cabinet) is unexplored: potentially has other objects on/in it
+ * (0.1 meters away) CounterTop5(CounterTop) is unexplored: potentially has other objects on/in it
+ * (1.2 meters away) Fridge_683c888d(Fridge) is unexplored: potentially has other objects on/in it
+ * (10.4 meters away) CounterTop4(CounterTop) is unexplored: potentially has other objects on/in it
+ * (11.3 meters away) SinkBasin_28084e25(SinkBasin) is unexplored: potentially has other objects on/in it
+ * (12.4 meters away) CounterTop1(CounterTop) is unexplored: potentially has other objects on/in it
+ * (18.1 meters away) Cabinet_bc977650(Cabinet) is unexplored: potentially has other objects on/in it
+ * (18.1 meters away) CounterTop3(CounterTop) is unexplored: potentially has other objects on/in it
+ * (18.1 meters away) Drawer_f530e642(Drawer) is unexplored: potentially has other objects on/in it
+ * (21.9 meters away) StoveBurner_58b674c4(StoveBurner) is unexplored: potentially has other objects on/in it
+ * (22.3 meters away) Cabinet_178a2f0f(Cabinet) is unexplored: potentially has other objects on/in it
+ * (22.3 meters away) Cabinet_8dc96e98(Cabinet) is unexplored: potentially has other objects on/in it
+ * (22.3 meters away) CounterTop2(CounterTop) is unexplored: potentially has other objects on/in it
+
+[Object Knowledge]
+ * Cabinet_2fee59ce(Cabinet): closed,
+ * Cabinet_5c8637ba(Cabinet): closed,
+ * Fridge_683c888d(Fridge): closed,
+
+Note that each object has exactly one unique category. There is no multi-purpose tool in the environment. Assume the robot has perfect object recognition accuracy.
+
+[Previous Tasks]
+ None
+
+[Action History]
+ None
+
+[Existing Plan]
+ None
+
+[Extra Instructions]
+ None
+
+[Possible Options]
+ * motor action: open Cabinet_5c8637ba
+ * motor action: move to <receptacle>
+ * special action: 'done'
+ * special action: 'quit'
+
+[Blacklisted Options]
+ * attend to subtask: go to explore a/an sinkbasin
+
+Notes: 
+ * Some of the possible options are parametrized, you have to replace "<receptacle>" with the name or type of a receptacle object listed in the spatial knowledge, and replace "<object>" with the name or type of an object.
+ * Reuse existing subtasks as much as possible. You don't have to think about the preconditions of the subtasks. If they are on the list, you may assume they are applicable.
+ * Do not perform the 'done' action or the 'quit' unless you are absolutely certain the task has been completed or cannot be completed.
+ * Moving to a location that has already been explored will not lead to any new information.
+ * A container receptacle (e.g. Fridge, Cabinet) has to be opened to be fully explored.
+ * An object with a 'sliced' attribute is already fully sliced, and cannot be sliced further.
+
+You will approach the current situation step-by-step and suggest an option for the robot to take in the end.
+
+First, repeat the current task and list a few common strategies for approaching the specified task in the kitchen. Note that the strategies you listed should respect the robot's capabilities. For example, the robot cannot ask a human for help. Also list a set of goal conditions for the task.
+
+Then, write a detailed analysis of the current situation from the information provided by the robot. This includes but is not limited to:
+ * Any useful information you noticed from spatial or object knowledge
+ * Whether the past actions of the robot indicate part of the task is done or whether the robot is focusing on part of the task
+ * How relevant the existing plan is to the task
+
+After analyzing the situation, generate an analysis of the task given the current situation of the kitchen. Reflect on what needs to be done for the current task. Is part of the task already achieved? If so, explicitly explain which part of the provided information shows that part of the task is already achieved.
+
+Next, given the analysis above, generate a short plan for the robot to do next to complete the task. Keep it concise. The plan can be on a high level, each step does not have to correspond to a motor action. You may leave this blank or state "no further steps are required" if you believe the task is already achieved.
+
+The next step is to identify the relevant and useful options from the [Possible Options] section. For parametrized options, you should fill the variable placeholder with actual values. Analyze how each option can potentially contribute to the task. For "attend to subtask" options, evaluate their usefulness based on their end condition. Note that your evaluation has to be based on the current observation provided by the robot. Do not recommend an option that is useful in the future but not right now. Your evaluation should not contain any "if". You may recommend attending to a subtask even if the subtask is partially completed as long as the end condition of the subtask is useful for the current task. You should use your own common sense knowledge about kitchens to help your judgment, this includes but is not limited to frequent co-occurrences of objects, common habits in the kitchen, etc. but you should also take into account the information provided by the robot. Explain your reasoning process in detail. Do the evaluation for all possible options.
+
+After the evaluation, suggest exactly one option that the robot should select right now. Your suggested option has to be from the list above. It cannot be in the [Blacklisted Options]. You have to replace all the variables if the option you choose is parametrized. It has to take into account what immediate action will help the robot the most. If two options are equally preferable, prioritize higher-level actions. That is, choose to attend to subtasks over motor actions, and choose to attend to longer horizon subtasks over short horizon subtasks. Also briefly state the purpose of this choice. Refer to objects by their object name. Do not use pronouns such as "it".
+
+If you think all options that are not in the [Blacklisted Options] section are inappropriate for the robot, suggest the "special action: 'quit'" option instead of randomly picking an unrelated option. For the [Purpose] section just state "The task cannot be completed by the possible options".
+
+And finally, indicate your response is finished by putting an "[END]" header.
+
+
+================================================================================
+-----------
+ ASSISTANT
+-----------
+
+[Current Task]
+Go to explore a sinkbasin.
+
+[Common Strategies for "go to explore a sinkbasin"]
+ * Navigate to the sinkbasin directly if it is within sight and accessible.
+ * If the sinkbasin is not within sight, explore the kitchen layout to find the sinkbasin.
+ * Avoid obstacles and dangerous areas while moving towards the sinkbasin.
+
+[Goal Conditions]
+ * The robot is located at the sinkbasin.
+ * The sinkbasin has been fully explored.
+
+[Current Situation Analysis]
+The robot is currently in front of Cabinet_5c8637ba. The sinkbasin (SinkBasin_28084e25) is 11.3 meters away from the robot's current location. All the large receptacles in the kitchen, including the sinkbasin, are unexplored. The robot's gripper is currently empty. There are no previous tasks or action history, indicating that the robot has just started its task. There is no existing plan or extra instructions provided. The robot has the option to open the cabinet in front of it, move to a receptacle, or terminate the task.
+
+[Task Analysis]
+The current task is to explore a sinkbasin. Given the current situation, the task has not been achieved yet as the robot is not at the sinkbasin and the sinkbasin is unexplored. The robot needs to navigate to the sinkbasin and explore it to complete the task.
+
+[Plan]
+Step1: Move to the sinkbasin.
+Step2: Explore the sinkbasin.
+
+[Option Evaluation]
+"motor action: open Cabinet_5c8637ba": This option is not directly relevant to the current task. Opening the cabinet does not contribute to the goal of exploring the sinkbasin.
+"motor action: move to <receptacle>": This option is highly relevant. The robot can move to the sinkbasin, which is necessary for the task.
+"special action: 'done'": This option is not applicable as the task has not been completed yet.
+"special action: 'quit'": This option is not applicable as the task can be completed with the current options.
+
+[Option Suggestion]
+"motor action: move to SinkBasin_28084e25"
+
+[Purpose]
+The purpose of the suggested option is to move the robot closer to the sinkbasin, which is necessary for the task of exploring the sinkbasin.
+
+[End]
+================================================================================
+------
+ USER
+------
+
+The robot wants to learn this action selection process as a production rule so that it can choose what action to take in the future on its own.
+
+Each production rule is composed of a set of preconditions and an effect, and has an "IF ... THEN ..." format. Basically it is saying if the preconditions are met, then choose a certain action. Note that the production rules can be parametrized. That is, it can have variable placeholders whose value will be assigned at runtime.
+
+The preconditions dictate whether the production is applicable, and has to be testable from the robot's knowledge (current task, current location, spatial knowledge, objects knowledge). The preconditions specify features from the observation that are important for the robot to make the decision.
+
+First, summarize the analysis above and identify the relevant information that is used for choosing the option "motor action: move to SinkBasin_28084e25" based on the previous information. Pay special attention to [Current Situation Analysis] and [Purpose] sections. The selected information should show why other options (with different actions, or the same action on a different target) are not chosen. This includes both information from the robot's knowledge and your own knowledge about kitchens. This might include the absence of some condition, such as something not in the robot's observation or the robot not at a certain location. In that case, use the "NOT" keyword. Be sure to include the current task description if this action is task-oriented. You should include very specific information. Instead of saying "the task has been successfully completed", refer to the specific part of the information that shows the task has been completed. Do not include information about the blacklisted actions.
+
+Next, combine the information in the previous part and express in English, the decision-making production rule for this specific case. It should be in the form of "IF ... THEN choose motor action: move to SinkBasin_28084e25". Where the IF part contains a conjunction of relevant knowledge. You may use the "AND" keyword in your production rule. You should include specific object names/types or location names for this rule.
+
+Afterward, for all the constants in the production rule (e.g. object types, location names, etc.), reflect on how each of them can be generalized. What specific feature of the instance leads to the decision? Does it has to be this specific object or can it be any object of the same category (or even more generalized category such as all objects/receptacles)? List all the components that can be generalized and what they should be generalized to. Your production should be applicable to all "go to explore a/an <receptacle>" type of tasks. You may leave this part blank if you think the specific rule generated above is already sufficiently generalized.
+
+Then, generate the generalized production rule by replacing the specific values in the specialized rule with a variable placeholder "<variable_name>" according to the previous section. This generalized production should be applicable to other similar but different situations. Keep in mind that rules are not themselves alternative actions, but instead units of context-dependent knowledge that contribute to making a decision and taking an action. You should try to make the rule as generalized as possible, capturing the underlying decision-making principles. You should also make the production rule as unambiguous as possible.
+If you have identified no generalizable components in the previous part, just copy the specific rule as your generalized rule.
+
+Finally, for each variable placeholder in the generalized rule, explain which specific object in the specialized rule it corresponds to.
+
+Note that the production rule you generated should respect the [Extra Instructions] (if any). You can assume the extra instructions are always there so you don't have to put them in the preconditions.
+
+You may include a short note at the end to explain your response.
+
+Use the following format:
+[Relevant Information]
+ * information 1
+ * information 2
+ ...
+
+[Specific Rule]
+IF ... THEN ...
+
+[Generalizable Constants]
+ * object1 could be anything that ...
+ * ...
+
+[Generalized Rule]
+IF ... THEN ...
+
+[Correspondence]
+ * component 1 is ...
+ * ...
+
+(optional) Notes: ...
+================================================================================
+-----------
+ ASSISTANT
+-----------
+
+[Relevant Information]
+ * The current task is to explore a sinkbasin.
+ * The sinkbasin (SinkBasin_28084e25) is 11.3 meters away from the robot's current location.
+ * The robot's gripper is currently empty.
+ * The robot has the option to move to a receptacle, which is necessary for the task.
+
+[Specific Rule]
+IF the current task is to explore a sinkbasin AND the sinkbasin is not at the current location AND the robot's gripper is empty THEN choose "motor action: move to SinkBasin_28084e25".
+
+[Generalizable Constants]
+ * "SinkBasin_28084e25" could be any sinkbasin that the robot needs to explore.
+ * "sinkbasin" could be any receptacle that the robot needs to explore.
+
+[Generalized Rule]
+IF the current task is to explore a/an <receptacle> AND the <receptacle> is not at the current location AND the robot's gripper is empty THEN choose "motor action: move to <receptacle>".
+
+[Correspondence]
+ * "<receptacle>" in the generalized rule corresponds to "SinkBasin_28084e25" in the specific rule.
+ * "<receptacle>" in the generalized rule also corresponds to "sinkbasin" in the specific rule.
+
+Notes: This rule is designed to guide the robot to move towards the target receptacle when the task is to explore a specific receptacle and the robot's gripper is empty. It is generalized to apply to any receptacle, not just a sinkbasin.
+================================================================================
+
+<<<META INFO>>>
+total tokens: 4102 finished reason: stop model name: gpt-4-0613

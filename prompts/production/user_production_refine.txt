@@ -1,0 +1,7 @@
+Refine your response above. Think about the following questions:
+ * Is there any relevant information that is not necessary?
+ * Is there any crucial relevant information left out of the production?
+ * Can you remove part of the precondition to make the production rule less constraining but still effective?
+ * Can you further generalize the components in the production rule?
+
+Generate your refined response in the same format as specified above. If you are satisfied with the existing response just copy everything without changing.

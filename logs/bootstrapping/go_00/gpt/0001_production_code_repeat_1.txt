@@ -1,0 +1,456 @@
+--------
+ SYSTEM
+--------
+
+You are an expert in both Python and SOAR cognitive architecture. You are helping to develop code for a household robot that has a decision-making process similar to the SOAR cognitive architecture. Specifically, you will translate the English description of production rules into Python implementation of the production rule.
+
+As a recap, a production rule has the form "IF ... THEN ..." where the IF part captures the preconditions of this production rule, and the THEN part leads to an action proposal.
+Specifically for developing the robot, you will be completing the following code template for each production rule:
+```py
+class YourProduction: # TODO: replace the name with yours; letters only, no numbers
+
+    target_task: str = ...  # define what kind of task this production is for, e.g. "place a/an <object> in/on a/an <receptacle>". If the production is not meant to be task-specific, set `target_task` to an empty string. Note that this is only for annotation purposes, you still have to test for the task in the `precondition` function below.
+
+    def precondition(
+        self, 
+        current_task: str,
+        current_location: str, # The object_name of the large receptacle that the robot is in front of (e.g. Fridge_12da98, Cabinet_d83acc, CounterTop4, etc.)
+        previous_tasks: Dict[str, bool], # A dictionary that maps previously attempted tasks to their outcome. True means successful execution while False means otherwise. If a task is never attempted before then it will not be included in this dictionary
+        spatial_knowledge: SpatialKnowledge, 
+        object_knowledge: ObjectKnowledge,
+    ) -> Tuple[bool, str]:
+        """
+        Test if the precondition is met given the current information.
+        Set variable bindings if necessary.
+        This corresponds to the IF part of the production rule.
+        Return (True, "") if the precondition is met.
+        Otherwise, return (False, <reason for failure>) where the reason for failure should reflect which part of the precondition is not met.
+        """
+        # TODO: fill in your code here
+        # you may use setattr(self, <key>, <value>) to set variables to hold actual objects from the environment.
+
+    def apply(self) -> str:
+        """
+        Return the action if this production is applicable to the current state.
+        This corresponds to the THEN part of the production rule.
+        """
+        # TODO: fill in your code here
+
+    # you may also define your own helper functions
+```
+
+The following code snippet defines the components of spatial_knowledge and object_knowledge. You may use them in your code completion. You may also use any Python built-in functions and anything in the Python regex package (initialized by `import re`). Regex is very helpful when you want to generalize string matching in your production.
+```py
+# The following list defines the object types for large receptacles in the kitchen
+list_of_large_receptacles = [
+    "CounterTop",
+    "Cabinet",
+    "Drawer",
+    "Fridge",
+    "SinkBasin",
+]
+
+
+class Object(NamedTuple):
+    """
+    Representation for all objects (including receptacles)
+    Keep track of object attributes
+    """
+
+    object_name: str # name of the object, unique in the environment
+    object_type: str # type of the object, e.g. Mug, Apple, Microwave, ...
+    location: str # which receptacle can the object be found
+    supporting: str # receptacle or another object that is supporting this object
+    openable: bool = False # whether this object is a container that can be open/closed
+    opened: bool = False # whether this object is opened, undefined if the object is not a container
+    pickable: bool = False # whether this object can be picked up by the robot
+    toggleable: bool = False # whether this object is an appliance that can be turned on/off
+    toggled: bool = False # whether this object is turned on, undefined if the object is not an appliance
+    cookable: bool = False # whether this object can be cooked
+    cooked: bool = False # whether this object is cooked
+    dirty: bool = False # whether this object is dirty
+    Sliced: bool = False # whether this object is a slice
+
+    def __eq__(self, other: Union["Object", str]) -> bool:
+        """
+        If <other> is an object, return if the object_name matches. 
+        If <other> is a string, return if the string matches the current object_name or object_type.
+        """
+
+
+class Receptacle:
+    """
+    Representation for large receptacles such as CounterTop, Cabinet, Fridge, etc.
+    Keep track of the objects that are supported by the receptacle (either directly or indirectly)
+    """
+
+    object_name: str # name of the receptacle, unique in the environment
+    object_type: str # type of the receptacle, e.g. CounterTop, Drawer, ...
+    hosting: Optional[List[Objects]] # a list of objects known to be in/on this receptacle; None if this receptacle is unexplored.
+    visited: bool # whether the receptacle has been fully explored
+
+    def __contains__(self, key: str) -> bool:
+        """
+        Return whether an object is known to exist in/on this receptacle.
+        The key could be either an object name or an object type.
+        """
+
+    def __eq__(self, other: Union["Object", str]) -> bool:
+        """
+        If <other> is an object, return if the object_name matches. 
+        If <other> is a string, return if the string matches the current object_name or object_type.
+        """
+
+    def get_hosting(self) -> Optional[List[Object]]:
+        """
+        Return a list of objects known to be in/on this receptacle.
+        Return None if this receptacle has never been visited so it is unclear what it has.
+        Return an empty list if this receptacle is known to be empty.
+        """
+
+
+class Gripper(Receptacle):  # the robot's gripper is represented as a receptacle
+    object_name = "RobotGripper"
+    object_type = "Gripper"
+    hosting: List[Object] = [] # objects that are directly or indirectly supported by the robot's gripper; empty list if the gripper is unoccupied
+    visited = True # the robot always has full knowledge of its gripper status
+
+
+class SpatialKnowledge:
+    """
+    The existing spatial knowledge of the kitchen, including where the known objects are, how far away are the large receptacles
+    Note that spatial knowledge only contains large receptacles as defined in the `list_of_large_receptacles`, other smaller objects such as microwaves, plates, etc. are not included in the spatial knowledge despite their ability to support other objects
+    But spatial knowledge also includes information about the robot's gripper as the gripper is a special kind of receptacle
+    Also keep in mind spatial knowledge does not encode the state of the large receptacles (e.g. whether the Fridge is opened). If you need such information, you would need to get it from object knowledge
+    """
+
+    locations: Dict[str, Receptacle] # a dictionary that maps the name of receptacles to receptacle objects
+
+    def __getitem__(self, receptacle_name: str) -> Optional[Receptacle]:
+        """
+        Return the corresponding receptacle object (if exist) given the name or type of the receptacle.
+        e.g. spatial_knowledge["RobotGripper"] returns the gripper object
+        """
+
+    def get_distance(self, location: str) -> float:
+        """
+        Return the distance from the robot's current location to the specific location.
+        """
+
+
+class ObjectKnowledge:
+    """
+    The existing knowledge of objects seen in the kitchen
+    Do not include unexplored receptacles
+    """
+
+    objects: Dict[str, Object] # a dictionary that maps the name of objects to objects.
+
+    def __getitem__(self, key: Union[str, Receptacle]) -> Optional[Object]:
+        """
+        Return the object that has the same name or type of the key (if any).
+        If the key is a Receptacle object, return the corresponding Object object (if seen by the robot before).
+        Note that unexplored receptacles are not included in object knowledge and will return None.
+        """
+
+    def __contains__(self, key: str) -> bool:
+        """
+        Return whether the robot knows anything about a specific object or object type. 
+        Note that unexplored receptacles are not included in object knowledge and will return False.
+        """
+```
+
+Additionally, you may use the following function to query whether a general statement is true. This might help express the preconditions that are beyond the robot's knowledge.
+```py
+def OracleQuery(statement: str) -> bool:
+    """
+    Return whether the input statement is true or false
+    """
+```
+The statement you provided should be self-contained and its correctness should be independent from the current environment of the robot. You may use natural language for the statement you want to test.
+Good example: "Eggs are commonly stored in the fridge"
+Good example: "Lettuce is a kind of vegetable"
+Bad example: "There is an egg in the fridge"
+Bad example: "The robot's gripper is empty"
+Bad example: "Where is Egg typically stored?"
+Bad example: "How to make a sandwich"
+
+Another helper function is defined to ensure consistent object name/type comparison. This is helpful if you want to check if a specific object fits the description.
+```py
+def name_equal(name1: str, name2: str) -> bool:
+    """
+    Return whether the two names are referring the same object
+    """
+```
+Examples:
+```
+>>> name_equal("Drawer_13da9f", "drawer")
+True
+>>> name_equal("Knife_d9d12c", "Fork")
+False
+>>> name_equal("Cabinet", "cabinet")
+True
+>>> name_equal(obj.object_type, "apple") # returns whether the object is an apple
+```
+================================================================================
+------
+ USER
+------
+
+[Relevant Information]
+ * The current task is to explore a sinkbasin.
+ * The sinkbasin (SinkBasin_28084e25) is 11.3 meters away from the robot's current location.
+ * The robot's gripper is currently empty.
+ * The robot has the option to move to a receptacle, which is necessary for the task.
+
+[Specific Rule]
+IF the current task is to explore a sinkbasin AND the sinkbasin is not at the current location AND the robot's gripper is empty THEN choose "motor action: move to SinkBasin_28084e25".
+
+[Generalizable Constants]
+ * "SinkBasin_28084e25" could be any sinkbasin that the robot needs to explore.
+ * "sinkbasin" could be any receptacle that the robot needs to explore.
+
+[Generalized Rule]
+IF the current task is to explore a/an <receptacle> AND the <receptacle> is not at the current location AND the robot's gripper is empty THEN choose "motor action: move to <receptacle>".
+
+[Correspondence]
+ * "<receptacle>" in the generalized rule corresponds to "SinkBasin_28084e25" in the specific rule.
+ * "<receptacle>" in the generalized rule also corresponds to "sinkbasin" in the specific rule.
+
+Notes: This rule is designed to guide the robot to move towards the target receptacle when the task is to explore a specific receptacle and the robot's gripper is empty. It is generalized to apply to any receptacle, not just a sinkbasin.
+
+----
+
+Given the description above, generate the corresponding Python implementation for the [Generalized Rule] step by step:
+
+First, analyze the [Relevant Information] and the IF part of the [Generalized Rule] and determine what variable bindings are needed. For each of the variables, identify how the value for the variable should be assigned (e.g. parsed from current_task, iterate through all receptacles, etc.) Additionally, state what constraint(s) should the value satisfy.
+
+Next, for each of the preconditions, identify whether they are related to a variable. If so, list the variable(s) they are related to, and also state which attribute(s) of the variable is being constrained on. Pay attention to the implicit constraints. For example, "robot holding the target knife" constrains both the robot holding the target object, and the target object being a knife. Otherwise, state what part(s) are they concerned with (e.g. current task). Use the exact words from the [Generalized Rule] as names for each predicate, do not just say "the first predicate" or paraphrase.
+
+Then, plan how to test for each of the constraints in the previous section. Which part of knowledge corresponds to each predicate in the preconditions?
+As a reminder, you must not use direct string comparison (`==` or `!=`) when comparing object types, object names, or location names. Always use `name_compare` to avoid compatibility issues.
+
+Finally, using all the information above, write the Python implementation by filling in the production rule template. Include all the variable bindings, preconditions, and effects. Comment your code properly.
+
+As a reminder, all actions returned by the `effect` function of the productions should have one of the following prefixes.
+ * motor action: ...
+ * attend to subtask: ...
+ * special action: ...
+
+Also, set your `target_task` to go to explore a/an <receptacle>.
+
+Use the following format:
+[Variable Bindings]
+ * name of variable 1: a brief description of what this variable is for. Its value should be assigned based on the current task.
+ * name of variable 2: a brief description of variable 2. Its value should be assigned based on the current location. It has to be a ...
+ * name of variable 3: a brief description of variable 3. Its value should be assigned by iterating through all receptacles and finding the receptacle that ...
+ * ...
+
+[Precondition Relation]
+ * "predicate 1" is about the current task
+ * "predicate 2" is about the object type of variable 1 and attribute 2 of variable 2
+ * ...
+
+[Precondition Test]
+ * The robot's gripper is empty can be tested by checking if `spatial_knowledge["RobotGripper"].hosting == []`
+ * The target receptacle is opened can be tested by checking if `object_knowledge[spatial_knowledge[target_receptacle]].opened`
+ * The target receptacle is not empty can be tested by checking if `spatial_knowledge[target_receptacle].hosting is not None and spatial_knowledge[target_receptacle].hosting != []`
+ * "predicate 4" can be tested by iterating through all the receptacles and ...
+ * ...
+
+[Python Implementation]
+```py
+<Your Code Here>
+```
+================================================================================
+-----------
+ ASSISTANT
+-----------
+
+[Variable Bindings]
+ * target_receptacle: This variable is for the receptacle that the robot needs to explore. Its value should be parsed from the current task.
+ * current_receptacle: This variable is for the receptacle that the robot is currently at. Its value should be assigned based on the current location.
+
+[Precondition Relation]
+ * "the current task is to explore a/an <receptacle>" is about the current task and the target_receptacle.
+ * "<receptacle> is not at the current location" is about the target_receptacle and the current_receptacle.
+ * "the robot's gripper is empty" is about the robot's gripper.
+
+[Precondition Test]
+ * The current task is to explore a/an <receptacle> can be tested by checking if `re.match(r"explore a/an (\w+)", current_task)` and `name_equal(re.match(r"explore a/an (\w+)", current_task).group(1), target_receptacle)`.
+ * <receptacle> is not at the current location can be tested by checking if `not name_equal(current_receptacle, target_receptacle)`.
+ * The robot's gripper is empty can be tested by checking if `spatial_knowledge["RobotGripper"].hosting == []`.
+
+[Python Implementation]
+```py
+import re
+from typing import Dict, Tuple
+from .knowledge import SpatialKnowledge, ObjectKnowledge
+
+class ExploreReceptacle:
+
+    target_task: str = "explore a/an <receptacle>"
+
+    def precondition(
+        self, 
+        current_task: str,
+        current_location: str,
+        previous_tasks: Dict[str, bool],
+        spatial_knowledge: SpatialKnowledge, 
+        object_knowledge: ObjectKnowledge,
+    ) -> Tuple[bool, str]:
+        # Parse the target receptacle from the current task
+        match = re.match(r"explore a/an (\w+)", current_task)
+        if not match:
+            return False, "The current task is not to explore a receptacle."
+        target_receptacle = match.group(1)
+
+        # Get the current receptacle based on the current location
+        current_receptacle = spatial_knowledge[current_location].object_type
+
+        # Check if the target receptacle is not at the current location
+        if name_equal(current_receptacle, target_receptacle):
+            return False, "The target receptacle is at the current location."
+
+        # Check if the robot's gripper is empty
+        if spatial_knowledge["RobotGripper"].hosting != []:
+            return False, "The robot's gripper is not empty."
+
+        # All preconditions are met
+        return True, ""
+
+    def apply(self) -> str:
+        # The action is to move to the target receptacle
+        return "motor action: move to " + self.target_receptacle
+```
+================================================================================
+------
+ USER
+------
+
+The precondition of the code you generated did not pass the following test case:
+
+[Current Task] go to explore a/an sinkbasin
+
+[Current Location] Cabinet_5c8637ba
+
+[Spatial Knowledge]
+ * (0.0 meters away) RobotGripper(Gripper) is empty
+ * (0.0 meters away) Cabinet_2fee59ce(Cabinet) is unexplored: potentially has other objects on/in it
+ * (0.0 meters away) Cabinet_5c8637ba(Cabinet) is unexplored: potentially has other objects on/in it
+ * (0.1 meters away) CounterTop5(CounterTop) is unexplored: potentially has other objects on/in it
+ * (1.2 meters away) Fridge_683c888d(Fridge) is unexplored: potentially has other objects on/in it
+ * (10.4 meters away) CounterTop4(CounterTop) is unexplored: potentially has other objects on/in it
+ * (11.3 meters away) SinkBasin_28084e25(SinkBasin) is unexplored: potentially has other objects on/in it
+ * (12.4 meters away) CounterTop1(CounterTop) is unexplored: potentially has other objects on/in it
+ * (18.1 meters away) Cabinet_bc977650(Cabinet) is unexplored: potentially has other objects on/in it
+ * (18.1 meters away) CounterTop3(CounterTop) is unexplored: potentially has other objects on/in it
+ * (18.1 meters away) Drawer_f530e642(Drawer) is unexplored: potentially has other objects on/in it
+ * (21.9 meters away) StoveBurner_58b674c4(StoveBurner) is unexplored: potentially has other objects on/in it
+ * (22.3 meters away) Cabinet_178a2f0f(Cabinet) is unexplored: potentially has other objects on/in it
+ * (22.3 meters away) Cabinet_8dc96e98(Cabinet) is unexplored: potentially has other objects on/in it
+ * (22.3 meters away) CounterTop2(CounterTop) is unexplored: potentially has other objects on/in it
+
+[Object Knowledge]
+ * Cabinet_2fee59ce(Cabinet): closed,
+ * Cabinet_5c8637ba(Cabinet): closed,
+ * Fridge_683c888d(Fridge): closed,
+
+[Previous Tasks]
+ None
+
+[Expected Return of `precondition()`]
+(True, "")
+
+[Your Code Return]
+The current task is not to explore a receptacle.
+
+You are going to debug this step-by-step, and generate a new implementation for the production.
+
+First, reflect on what the returned message tells you about where the error is.
+
+Next, identify what the error is.
+Pay special attention to the following checklist:
+ * Did you forget to use `name_equal` to compare location or object names?
+ * Did you forget to set the variable bindings?
+ * Is there a problem with how you generate variable bindings?
+ * Is there a mismatch between your code and the provided interface? Is there something wrong with your preview response?
+
+Then, explain what needs to be changed to your original code implementation.
+
+Finally, generate a new implementation for the production above.
+
+Use the following format:
+[Error Interpretation]
+The message indicates that ... has failed.
+
+[Error attribution]
+The error is because ...
+
+[Things to change]
+The ... test should be ...
+
+[Python Implementation]
+```py
+<Your New Code Here>
+```
+================================================================================
+-----------
+ ASSISTANT
+-----------
+
+[Error Interpretation]
+The message indicates that the precondition test for "the current task is to explore a/an <receptacle>" has failed.
+
+[Error Attribution]
+The error is because the regular expression used to parse the target receptacle from the current task does not match the task "go to explore a/an sinkbasin". The regular expression expects the task to start with "explore a/an", but the actual task starts with "go to explore a/an".
+
+[Things to Change]
+The regular expression test should be changed to match the task "go to explore a/an <receptacle>".
+
+[Python Implementation]
+```py
+import re
+from typing import Dict, Tuple
+from .knowledge import SpatialKnowledge, ObjectKnowledge
+
+class ExploreReceptacle:
+
+    target_task: str = "go to explore a/an <receptacle>"
+
+    def precondition(
+        self, 
+        current_task: str,
+        current_location: str,
+        previous_tasks: Dict[str, bool],
+        spatial_knowledge: SpatialKnowledge, 
+        object_knowledge: ObjectKnowledge,
+    ) -> Tuple[bool, str]:
+        # Parse the target receptacle from the current task
+        match = re.match(r"go to explore a/an (\w+)", current_task)
+        if not match:
+            return False, "The current task is not to explore a receptacle."
+        target_receptacle = match.group(1)
+
+        # Get the current receptacle based on the current location
+        current_receptacle = spatial_knowledge[current_location].object_type
+
+        # Check if the target receptacle is not at the current location
+        if name_equal(current_receptacle, target_receptacle):
+            return False, "The target receptacle is at the current location."
+
+        # Check if the robot's gripper is empty
+        if spatial_knowledge["RobotGripper"].hosting != []:
+            return False, "The robot's gripper is not empty."
+
+        # All preconditions are met
+        return True, ""
+
+    def apply(self) -> str:
+        # The action is to move to the target receptacle
+        return "motor action: move to " + self.target_receptacle
+```
+================================================================================
+
+<<<META INFO>>>
+total tokens: 4961 finished reason: stop model name: gpt-4-0613

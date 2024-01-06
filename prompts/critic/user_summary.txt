@@ -1,0 +1,58 @@
+Task: {task}
+
+Existing Production Rules:
+{productions}
+
+You will improve the production rules step by step.
+
+First, based on your own understanding and the productions above, summarize the end condition of the task. 
+
+Given the task, list some common cases of the task. What are the intermediate steps? What are the preconditions and post-conditions of the steps?
+
+Then, for each production rule above, evaluate whether it is reasonable and whether it can be improved. Potential improvements could be removing unnecessary constraints, generalizing the components, and fixing logical errors. If you do not understand what the production rule is trying to achieve, propose to remove the production as it might cause an error for the robot. For each production rule, suggest one of the following:
+ * keep it as is
+ * remove it
+ * change it to ...
+As a reminder the possible action for each production is one of the following:
+ * special action
+   - 'done': to indicate the current task has been successfully completed
+   - 'quit': to indicate the existing observation is sufficient to conclude that the task is impossible
+ * motor action
+   - move to location
+   - open/close objects
+   - toggle on/off appliance
+   - pick up/put down objects
+ * attend to subtask
+{subtasks}
+
+Next, given the cases of the task and the existing productions, determine if there are scenarios that are not addressed by the existing productions. Briefly explain what cases might happen but cannot be handled by the existing production rules. If you believe the existing production rules are already exhaustive, clearly state so.
+
+Finally, for each scenario you listed in the previous section (if any), propose a production rule for the robot to learn. The production rule you proposed should be in a similar format as the existing production rules.
+
+Use the following format:
+
+[End Condition]
+The task ends when ...
+
+[Common Cases]
+ * ...
+
+[Existing Productions]
+ * "production 1": this production is reasonable but overly constrained because ...
+ Suggestion: change it to ...
+ * "production 2": this production has a contradiction that ...
+ Suggestion: remove it
+ * "production 3": this production is missing a constraint that ...
+ Suggestion: change it to ...
+ * ...
+
+[Uncovered Cases]
+ * Case1: brief description 
+   - condition 1
+   - condition 2
+   - ...
+ * ...
+
+[New Production Rule]
+ * IF ... THEN ...
+ * ...

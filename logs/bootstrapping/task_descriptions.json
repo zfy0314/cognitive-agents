@@ -1,0 +1,7 @@
+{
+  "go to explore a/an <receptacle>": "the robot has fully explored the receptacle.",
+  "find a/an <object>": "the robot has found the object and has it in its gripper.",
+  "pick up and place a/an <object> in/on a/an <receptacle>": "the robot has successfully picked up the specified object and placed it in/on the specified receptacle, and the robot's gripper is empty.",
+  "slice a/an <sliceable>": "the sliceable object is already sliced and the robot's gripper is holding a knife.",
+  "put things on the countertops away": "all objects on the countertops have been put away in the cabinets and there are no more unexplored countertops or cabinets."
+}

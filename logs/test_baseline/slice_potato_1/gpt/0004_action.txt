@@ -1,0 +1,208 @@
+--------
+ SYSTEM
+--------
+
+You are an expert on kitchen-related tasks, and you also know a lot about how people usually arrange their kitchens. Currently. you are guiding a household robot to do some kitchen tasks in the AI2Thor simulator. The goal of the robot is to complete its task as efficiently as possible or determine that the task cannot be completed given the kitchen setup.
+
+The robot has a decision-making process similar to the SOAR cognitive architecture but has no kitchen-specific production rules initially.
+
+Hardware-wise the robot has an onboard camera that can perform object recognition. The camera is the robot's only perceptual sensor. The robot also has wheels to navigate around the kitchen. Additionally, it also has a gripper that can pick things up and put them down, open/close containers, or slice objects with a knife. It also knows how to turn on and off appliances such as a toaster.
+
+Note that the robot only has one gripper. So if its gripper is occupied and the robot wants to pick up something else it would have to place the object currently in the gripper on some other receptacle first before picking up the new object. If objects are stacked (e.g. an apple is on a plate), then the robot can choose to pick the bottom object (i.e. plate) to have all of the stacked objects in its gripper.
+
+If the robot is holding a knife in its gripper and there is a sliceable object (e.g. a tomato) in its field of view, then the robot can slice that object with the knife. The robot can also crack an egg with a knife. However, if an object already has a "sliced" attribute in its [Object Knowledge], it means the object cannot be further sliced by the robot, and should be considered as already sliced.
+
+Additionally, it can also perform two special actions to indicate termination:
+ * 'done': From the observations and past information the robot is certain that the task has been successfully completed
+ * 'quit': From the observations and past information the robot is certain that the task cannot be completed given the current environment
+
+The robot needs your help in choosing the right action to do and establishing production rules for future decision-making in similar scenarios.
+
+At each point where the robot is unsure what to do, it will give you the following information:
+ * Current Task: The task the robot is currently trying to accomplish.
+ * Current Location: Where the robot is at.
+ * Spatial Knowledge: The robot already knows all the possible large receptacles (cabinets, drawers, etc.) in the kitchen, this part of knowledge reflects where different objects are located. The robot's gripper is also considered a large receptacle. Other smaller receptacles such as microwaves, plates, etc. are not included despite their ability to support other objects.
+ * Object Knowledge: The specific state of the objects that the robot has seen before, such as whether a container is open/closed, or whether an appliance is turned on/off.
+ * Previous Tasks (if any): A list of previous tasks (or subtasks) and whether they have been successfully executed.
+ * Action History (if any): The recent actions the robot has taken in the past and their purposes.
+ * Existing Plan (if any): The plan of the robot during its last action, this should give you an idea of what the robot is trying to do for the task.
+ * Possible Options: An exhaustive list of all the options the robot can do right now. Each of them will be one of the following categories: motor actions (actions that interact with the environment), attend to sub-task (internal actions that shift the focus of the robot and do not have an impact on the environment), and special actions ('done' and 'quit').
+
+Note that each object will be presented to you with its name and object type. For example, "Cabinet_343bd0(Cabinet)" has the name "Cabinet_343bd0" and is of type "Cabinet". Also, if the type name ends with "Sliced", it means the object is a slice (e.g. "LettuceSliced" represents a slice of lettuce).
+================================================================================
+------
+ USER
+------
+
+The robot is providing you with the following information
+
+[Current Task] slice a/an potato
+
+[Current Location] in front of Cabinet_4faabc6f
+
+[Spatial Knowledge]
+ * (0.0 meters away) RobotGripper(Gripper) is empty
+ * (0.0 meters away) Cabinet_4faabc6f(Cabinet) has been explored: it is empty
+ * (0.0 meters away) Cabinet_63381269(Cabinet) has been explored: it is empty
+ * (0.0 meters away) CounterTop1(CounterTop) is partially explored: it has Plate_dde6ca4d(Plate), Potato_208e6ea2(Potato), Spatula_055867d4(Spatula), and potentially other objects
+ * (0.0 meters away) Drawer_121fdf6f(Drawer) is unexplored: potentially has other objects on/in it
+ * (0.0 meters away) Drawer_b23191f9(Drawer) is unexplored: potentially has other objects on/in it
+ * (1.0 meters away) Cabinet_1b680bcf(Cabinet) is unexplored: potentially has other objects on/in it
+ * (1.0 meters away) Cabinet_b92ee11c(Cabinet) is unexplored: potentially has other objects on/in it
+ * (1.0 meters away) Drawer_e33d0cbf(Drawer) is unexplored: potentially has other objects on/in it
+ * (1.0 meters away) Drawer_eb279e69(Drawer) is unexplored: potentially has other objects on/in it
+ * (1.2 meters away) Fridge_b4ec6389(Fridge) is unexplored: potentially has other objects on/in it
+ * (2.1 meters away) CounterTop2(CounterTop) is unexplored: potentially has other objects on/in it
+ * (13.0 meters away) CounterTop4(CounterTop) is unexplored: potentially has other objects on/in it
+ * (21.1 meters away) CounterTop3(CounterTop) is unexplored: potentially has other objects on/in it
+ * (22.3 meters away) Cabinet_2b3534ad(Cabinet) is unexplored: potentially has other objects on/in it
+ * (22.3 meters away) Cabinet_70f7d173(Cabinet) is unexplored: potentially has other objects on/in it
+ * (22.7 meters away) StoveBurner_71ec8a3a(StoveBurner) is unexplored: potentially has other objects on/in it
+ * (23.0 meters away) SinkBasin_8b626e24(SinkBasin) is unexplored: potentially has other objects on/in it
+ * (23.1 meters away) CounterTop5(CounterTop) is unexplored: potentially has other objects on/in it
+
+[Object Knowledge]
+ * Drawer_e33d0cbf(Drawer): closed,
+ * Cabinet_1b680bcf(Cabinet): closed,
+ * Cabinet_4faabc6f(Cabinet): opened,
+ * Drawer_121fdf6f(Drawer): closed,
+ * Drawer_b23191f9(Drawer): closed,
+ * Cabinet_63381269(Cabinet): opened,
+ * Cabinet_b92ee11c(Cabinet): closed,
+ * Fridge_b4ec6389(Fridge): closed,
+ * Plate_dde6ca4d(Plate) at CounterTop1 clean,
+ * Potato_208e6ea2(Potato) at CounterTop1: uncooked,
+ * Spatula_055867d4(Spatula) at CounterTop1
+
+Note that each object has exactly one unique category. There is no multi-purpose tool in the environment. Assume the robot has perfect object recognition accuracy.
+
+[Previous Tasks]
+ None
+
+[Action History]
+ * (time 1) motor action: open Cabinet_63381269 (purpose: for the purpose of explore the contents of Cabinet_63381269 in search of a knife.))
+ * (time 2) motor action: move to Cabinet_4faabc6f (purpose: for the purpose of explore Cabinet_4faabc6f in search of a knife.))
+ * (time 3) motor action: open Cabinet_4faabc6f (purpose: for the purpose of explore Cabinet_4faabc6f in search of a knife.))
+
+[Existing Plan]
+ None
+
+[Possible Options]
+ * motor action: close Cabinet_4faabc6f
+ * motor action: move to <receptacle>
+ * special action: 'done'
+ * special action: 'quit'
+
+[Blacklisted Options]
+ None
+
+Notes: 
+ * Some of the possible options are parametrized, you have to replace "<receptacle>" with the name or type of a receptacle object listed in the spatial knowledge, and replace "<object>" with the name or type of an object.
+ * Reuse existing subtasks as much as possible. You don't have to think about the preconditions of the subtasks. If they are on the list, you may assume they are applicable.
+ * Do not perform the 'done' action or the 'quit' unless you are absolutely certain the task has been completed or cannot be completed.
+ * Moving to a location that has already been explored will not lead to any new information.
+ * A container receptacle (e.g. Fridge, Cabinet) has to be opened to be fully explored.
+ * An object with a 'sliced' attribute is already fully sliced, and cannot be sliced further.
+
+You will approach the current situation step-by-step and suggest an option for the robot to take in the end.
+
+First, repeat the current task and list a few common strategies for approaching the specified task in the kitchen. Note that the strategies you listed should respect the robot's capabilities. For example, the robot cannot ask a human for help. Also list a set of goal conditions for the task.
+
+Then, write a detailed analysis of the current situation from the information provided by the robot. This includes but is not limited to:
+ * Any useful information you noticed from spatial or object knowledge
+ * Whether the past actions of the robot indicate part of the task is done or whether the robot is focusing on part of the task
+ * How relevant the existing plan is to the task
+
+After analyzing the situation, generate an analysis of the task given the current situation of the kitchen. Reflect on what needs to be done for the current task. Is part of the task already achieved? If so, explicitly explain which part of the provided information shows that part of the task is already achieved.
+
+Next, given the analysis above, generate a short plan for the robot to do next to complete the task. Keep it concise. The plan can be on a high level, each step does not have to correspond to a motor action. You may leave this blank or state "no further steps are required" if you believe the task is already achieved.
+
+The next step is to identify the relevant and useful options from the [Possible Options] section. For parametrized options, you should fill the variable placeholder with actual values. Analyze how each option can potentially contribute to the task. Note that your evaluation has to be based on the current observation provided by the robot. Do not recommend an option that is useful in the future but not right now. Your evaluation should not contain any "if". You should use your own common sense knowledge about kitchens to help your judgment, this includes but is not limited to frequent co-occurrences of objects, common habits in the kitchen, etc. but you should also take into account the information provided by the robot. Explain your reasoning process in detail. Do the evaluation for all possible options.
+
+After the evaluation, suggest exactly one option that the robot should select right now. Your suggested option has to be from the list above. It cannot be in the [Blacklisted Options]. You have to replace all the variables if the option you choose is parametrized. It has to take into account what immediate action will help the robot the most. Also briefly state the purpose of this choice. Refer to objects by their object name. Do not use pronouns such as "it".
+
+If you think all options that are not in the [Blacklisted Options] section are inappropriate for the robot, suggest the "special action: 'quit'" option instead of randomly picking an unrelated option. For the [Purpose] section just state "The task cannot be completed by the possible options".
+
+And finally, indicate your response is finished by putting an "[END]" header.
+
+Use the following format:
+
+[Current Task]
+(Repeat the current task from the information above)
+
+[Common Strategies for "current task"]
+ * common strategy 1
+ * ...
+
+[Goal Conditions]
+ * condition 1
+ * ...
+
+[Current Situation Analysis]
+ ...
+
+[Task Analysis]
+ ...
+
+[Plan]
+Step1: ...
+Step2: ...
+... 
+
+[Option Evaluation]
+"option 1": This option is recommended because ...
+"option 2": This option will contribute to ...
+...
+
+[Option Suggestion] (only include both the option category and the full option, replacing all variable placeholders, do not state the reasoning here)
+"suggested action"
+
+[Purpose]
+The purpose of the suggested option is to ...
+
+[End]
+================================================================================
+-----------
+ ASSISTANT
+-----------
+
+[Current Task]
+Slice a potato.
+
+[Common Strategies for "slice a potato"]
+ * Find a potato.
+ * Find a knife.
+ * Pick up the knife.
+ * Slice the potato.
+
+[Goal Conditions]
+ * The potato is sliced.
+
+[Current Situation Analysis]
+The robot is currently in front of Cabinet_4faabc6f. It has explored this cabinet and another one (Cabinet_63381269), but both are empty. The robot's gripper is also empty. There is a potato on CounterTop1, which is partially explored and also contains a plate and a spatula. There are several other cabinets, drawers, and countertops that have not been explored yet. The robot's previous actions indicate that it has been searching for a knife, but it has not found one yet. There is no existing plan.
+
+[Task Analysis]
+The task is to slice a potato. The robot has found a potato, but it has not found a knife yet. Therefore, the task is not yet complete.
+
+[Plan]
+Step1: Find a knife.
+Step2: Pick up the knife.
+Step3: Slice the potato.
+
+[Option Evaluation]
+"motor action: close Cabinet_4faabc6f": This option is not recommended because it does not contribute to the task. The robot has already explored this cabinet and it is empty.
+"motor action: move to <receptacle>": This option is recommended because it allows the robot to explore new areas and potentially find a knife. The robot should move to the nearest unexplored receptacle, which could be a drawer or a countertop.
+"special action: 'done'": This option is not recommended because the task is not yet complete. The robot has not sliced the potato yet.
+"special action: 'quit'": This option is not recommended because the task can still be completed. The robot has not explored all the receptacles yet and there is a chance that it will find a knife.
+
+[Option Suggestion]
+"motor action: move to Drawer_121fdf6f"
+
+[Purpose]
+The purpose of the suggested option is to explore Drawer_121fdf6f in search of a knife.
+
+[End]
+================================================================================
+
+<<<META INFO>>>
+total tokens: 3228 finished reason: stop model name: gpt-4-0613

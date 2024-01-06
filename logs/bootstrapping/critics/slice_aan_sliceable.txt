@@ -1,0 +1,133 @@
+--------
+ SYSTEM
+--------
+
+You are developing a household robot that runs the SOAR cognitive architecture to do some kitchen tasks. 
+
+As a reminder, SOAR agents have a set of production rules that encodes what the robot should do in different scenarios. All productions are in the form of "IF ... THEN ..." where the IF part dictates when the production rule is applicable, and the THEN part proposes the action. All proposed action has to have one of the following prefixes: "motor action: ...", "attend to subtask: ...", "special action: ...". The proposed action should be a single, atomic action (i.e. no "if" allowed in the THEN part of the production). Keep in mind that rules are not themselves alternative actions, but instead units of context-dependent knowledge that contribute to making a decision and taking an action.
+
+Hardware-wise the robot has an onboard camera that can perform object recognition. The camera is the robot's only perceptual sensor. The robot also has wheels to navigate around the kitchen. Additionally, it also has a gripper that can pick things up and put them down, open/close containers, or slice objects with a knife. It also knows how to turn on and off appliances such as a toaster.
+
+Note that the robot only has one gripper. So if its gripper is occupied and the robot wants to pick up something else it would have to place the object currently in the gripper on some other receptacle first before picking up the new object. If objects are stacked (e.g. an apple is on a plate), then the robot can choose to pick the bottom object (i.e. plate) to have all of the stacked objects in its gripper.
+
+Also, the gripper has limited range so if the robot wants to pick up some object it has to be in the same location of the object. Similarly, if the robot wants to put down some object in its gripper to a  receptacle, the robot has to be at the location of the target receptacle.
+
+If the robot is holding a knife in its gripper and there is a sliceable object (e.g. a tomato) in its field of view, then the robot can slice that object with the knife. The robot can also crack an egg with a knife. However, if an object already has a "sliced" attribute in its [Object Knowledge], it means the object cannot be further sliced by the robot, and should be considered as already sliced.
+
+Additionally, it can also perform two special actions to indicate termination:
+ * 'done': From the observations and past information the robot is certain that the task has been successfully completed
+ * 'quit': From the observations and past information the robot is certain that the task cannot be completed given the current environment
+
+The robot has some learning capabilities that allow it to generate production rules from its past experience of interacting with the kitchen. However, the automatically generated production rules might be overly constrained, and/or not cover all cases. So your job is to analyze the existing production rules and improve them. However, do not suggest any changes to a production rule unless you are certain the new version is a reasonable generalization.
+================================================================================
+------
+ USER
+------
+
+Task: slice a/an <sliceable>
+
+Existing Production Rules:
+ * IF the current task is to slice a/an <object> AND the robot is holding the <object> in its gripper AND the robot is not at a suitable place for slicing AND there is a countertop available THEN choose motor action: put <object> on <countertop>.
+ * IF the current task is to slice a/an <object> AND the robot is holding a knife AND the <object> is not at the robot's current location THEN choose motor action: move to <object_location>.
+ * IF the current task is to slice a/an <sliceable_object> AND the robot's gripper is empty AND the robot has not found a/an <sliceable_object> yet THEN choose 'attend to subtask: find a/an <sliceable_object>'.
+ * IF the current task is to slice a/an <sliceable> AND the <sliceable> is located on a countertop AND the robot's gripper is empty AND there is no <required_tool> in the robot's spatial knowledge THEN choose 'attend to subtask: find a/an <required_tool>'.
+ * IF the current task is to slice a/an <sliceable> AND the <sliceable> is already sliced AND the robot's gripper is holding a knife THEN choose Special action: 'done'.
+ * IF the current task is to slice a/an <sliceable> AND the robot's gripper is holding a knife AND the <sliceable> is located on the countertop in front of the robot THEN choose motor action: slice <sliceable>.
+
+You will improve the production rules step by step.
+
+First, based on your own understanding and the productions above, summarize the end condition of the task. 
+
+Given the task, list some common cases of the task. What are the intermediate steps? What are the preconditions and post-conditions of the steps?
+
+Then, for each production rule above, evaluate whether it is reasonable and whether it can be improved. Potential improvements could be removing unnecessary constraints, generalizing the components, and fixing logical errors. If you do not understand what the production rule is trying to achieve, propose to remove the production as it might cause an error for the robot. For each production rule, suggest one of the following:
+ * keep it as is
+ * remove it
+ * change it to ...
+As a reminder the possible action for each production is one of the following:
+ * special action
+   - 'done': to indicate the current task has been successfully completed
+   - 'quit': to indicate the existing observation is sufficient to conclude that the task is impossible
+ * motor action
+   - move to location
+   - open/close objects
+   - toggle on/off appliance
+   - pick up/put down objects
+ * attend to subtask
+   - find a/an <object>
+   - go to explore a/an <receptacle>
+   - pick up and place a/an <object> in/on a/an <receptacle>
+   - slice a/an <sliceable>
+
+Next, given the cases of the task and the existing productions, determine if there are scenarios that are not addressed by the existing productions. Briefly explain what cases might happen but cannot be handled by the existing production rules. If you believe the existing production rules are already exhaustive, clearly state so.
+
+Finally, for each scenario you listed in the previous section (if any), propose a production rule for the robot to learn. The production rule you proposed should be in a similar format as the existing production rules.
+
+Use the following format:
+
+[End Condition]
+The task ends when ...
+
+[Common Cases]
+ * ...
+
+[Existing Productions]
+ * "production 1": this production is reasonable but overly constrained because ...
+ Suggestion: change it to ...
+ * "production 2": this production has a contradiction that ...
+ Suggestion: remove it
+ * "production 3": this production is missing a constraint that ...
+ Suggestion: change it to ...
+ * ...
+
+[Uncovered Cases]
+ * Case1: brief description 
+   - condition 1
+   - condition 2
+   - ...
+ * ...
+
+[New Production Rule]
+ * IF ... THEN ...
+ * ...
+================================================================================
+-----------
+ ASSISTANT
+-----------
+
+[End Condition]
+The task ends when the sliceable object is already sliced and the robot's gripper is holding a knife.
+
+[Common Cases]
+ * The robot is holding the sliceable object but not at a suitable place for slicing.
+ * The robot is holding a knife but the sliceable object is not at the robot's current location.
+ * The robot's gripper is empty and the robot has not found a sliceable object yet.
+ * The sliceable object is located on a countertop, the robot's gripper is empty, and there is no required tool in the robot's spatial knowledge.
+ * The sliceable object is already sliced and the robot's gripper is holding a knife.
+ * The robot's gripper is holding a knife and the sliceable object is located on the countertop in front of the robot.
+
+[Existing Productions]
+ * "production 1": this production is reasonable but overly constrained because it assumes that the robot is holding the object. The robot could also be at a suitable place for slicing but not holding the object.
+ Suggestion: change it to "IF the current task is to slice a/an <object> AND the robot is not at a suitable place for slicing AND there is a countertop available THEN choose motor action: move to <countertop>".
+ * "production 2": this production is reasonable and does not need to be changed.
+ * "production 3": this production is reasonable and does not need to be changed.
+ * "production 4": this production is reasonable but overly constrained because it assumes that the sliceable object is located on a countertop. The object could also be located elsewhere.
+ Suggestion: change it to "IF the current task is to slice a/an <sliceable> AND the robot's gripper is empty AND there is no <required_tool> in the robot's spatial knowledge THEN choose 'attend to subtask: find a/an <required_tool>'".
+ * "production 5": this production is reasonable and does not need to be changed.
+ * "production 6": this production is reasonable and does not need to be changed.
+
+[Uncovered Cases]
+ * Case1: The robot is holding a sliceable object but not a knife.
+   - The robot's gripper is occupied by a sliceable object.
+   - The robot is not holding a knife.
+ * Case2: The robot is at a suitable place for slicing but the sliceable object is not there.
+   - The robot is at a suitable place for slicing.
+   - The sliceable object is not at the robot's current location.
+
+[New Production Rule]
+ * IF the current task is to slice a/an <sliceable> AND the robot's gripper is occupied by a/an <sliceable> AND the robot is not holding a knife THEN choose 'attend to subtask: find a knife'.
+ * IF the current task is to slice a/an <sliceable> AND the robot is at a suitable place for slicing AND the <sliceable> is not at the robot's current location THEN choose motor action: move to <sliceable_location>.
+================================================================================
+
+<<<META INFO>>>
+total tokens: 2126 finished reason: stop model name: gpt-4-0613

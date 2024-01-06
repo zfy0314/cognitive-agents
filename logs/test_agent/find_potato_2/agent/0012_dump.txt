@@ -1,0 +1,142 @@
+============================================================
+Agent: Alice    @ time   12
+------------------------------------------------------------
+Task:
+-----
+[find a/an potato]
+
+Procedurals:
+------------
+{ 'productions._clear_receptacle_done': ( 'ClearReceptacleDone',
+                                          <productions._clear_receptacle_done.ClearReceptacleDone object at 0x1310d2d10>),
+  'productions._explore_cabinet': ( 'ExploreCabinet',
+                                    <productions._explore_cabinet.ExploreCabinet object at 0x1310d3c10>),
+  'productions._explore_countertop': ( 'ExploreCountertop',
+                                       <productions._explore_countertop.ExploreCountertop object at 0x1310d28f0>),
+  'productions._explore_receptacle': ( 'ExploreReceptacle',
+                                       <productions._explore_receptacle.ExploreReceptacle object at 0x1310d3730>),
+  'productions._explore_receptacle2': ( 'ExploreReceptacle2',
+                                        <productions._explore_receptacle2.ExploreReceptacle2 object at 0x1310d3430>),
+  'productions._explore_receptacle3': ( 'ExploreReceptacle3',
+                                        <productions._explore_receptacle3.ExploreReceptacle3 object at 0x1310d3f70>),
+  'productions._explore_receptacle4': ( 'ExploreReceptacle4',
+                                        <productions._explore_receptacle4.ExploreReceptacle4 object at 0x1310d2ad0>),
+  'productions._find_object': ( 'FindObject',
+                                <productions._find_object.FindObject object at 0x143dc0af0>),
+  'productions._find_object2': ( 'FindObject2',
+                                 <productions._find_object2.FindObject2 object at 0x1310d3070>),
+  'productions._find_object3': ( 'FindObject3',
+                                 <productions._find_object3.FindObject3 object at 0x1310d33a0>),
+  'productions._find_object_in_gripper': ( 'FindObjectInGripper',
+                                           <productions._find_object_in_gripper.FindObjectInGripper object at 0x1310d2410>),
+  'productions._find_object_production': ( 'FindObjectProduction',
+                                           <productions._find_object_production.FindObjectProduction object at 0x1310d3a60>),
+  'productions._find_object_production2': ( 'FindObjectProduction2',
+                                            <productions._find_object_production2.FindObjectProduction2 object at 0x1310d3580>),
+  'productions._find_required_tool': ( 'FindRequiredTool',
+                                       <productions._find_required_tool.FindRequiredTool object at 0x1310d3dc0>),
+  'productions._find_sliceable_object': ( 'FindSliceableObject',
+                                          <productions._find_sliceable_object.FindSliceableObject object at 0x1310d3100>),
+  'productions._move_to_pick_up_object': ( 'MoveToPickUpObject',
+                                           <productions._move_to_pick_up_object.MoveToPickUpObject object at 0x143dc0610>),
+  'productions._move_to_slice_object': ( 'MoveToSliceObject',
+                                         <productions._move_to_slice_object.MoveToSliceObject object at 0x1310d2500>),
+  'productions._move_to_target_receptacle': ( 'MoveToTargetReceptacle',
+                                              <productions._move_to_target_receptacle.MoveToTargetReceptacle object at 0x143dc07f0>),
+  'productions._open_receptacle': ( 'OpenReceptacle',
+                                    <productions._open_receptacle.OpenReceptacle object at 0x1310d3910>),
+  'productions._open_receptacle_before_placing': ( 'OpenReceptacleBeforePlacing',
+                                                   <productions._open_receptacle_before_placing.OpenReceptacleBeforePlacing object at 0x143dc0130>),
+  'productions._pick_up_object': ( 'PickUpObject',
+                                   <productions._pick_up_object.PickUpObject object at 0x1310d2530>),
+  'productions._place_object_in_receptacle': ( 'PlaceObjectInReceptacle',
+                                               <productions._place_object_in_receptacle.PlaceObjectInReceptacle object at 0x1310d2d70>),
+  'productions._place_object_in_receptacle2': ( 'PlaceObjectInReceptacle2',
+                                                <productions._place_object_in_receptacle2.PlaceObjectInReceptacle2 object at 0x143dc0940>),
+  'productions._put_away_objects': ( 'PutAwayObjects',
+                                     <productions._put_away_objects.PutAwayObjects object at 0x1310d2710>),
+  'productions._slice_already_sliced_object': ( 'SliceAlreadySlicedObject',
+                                                <productions._slice_already_sliced_object.SliceAlreadySlicedObject object at 0x143dc0310>),
+  'productions._slice_object': ( 'SliceObject',
+                                 <productions._slice_object.SliceObject object at 0x1310d24d0>),
+  'productions._slice_object2': ( 'SliceObject2',
+                                  <productions._slice_object2.SliceObject2 object at 0x143dc0460>)}
+
+Declaratives:
+-------------
+Location History:
+ * Robot at CounterTop4 from time 0 to 2
+ * Robot at SinkBasin_8b626e24 from time 2 to 5
+ * Robot at Cabinet_2b3534ad from time 5 to 9
+ * Robot at Fridge_b4ec6389 from time 9 to 14
+
+Spatial Knowledge:
+ * (0.0 meters away) RobotGripper(Gripper) has Potato_208e6ea2(Potato), and nothing else
+ * (0.0 meters away) Fridge_b4ec6389(Fridge) has been fully explored: it has Apple_3ae85dc5(Apple), Egg_45bb54d2(Egg), Lettuce_a7611dd3(Lettuce), and nothing else
+ * (1.2 meters away) Cabinet_4faabc6f(Cabinet) is unexplored: potentially has other objects on/in it
+ * (1.2 meters away) Cabinet_63381269(Cabinet) is unexplored: potentially has other objects on/in it
+ * (1.2 meters away) CounterTop1(CounterTop) is unexplored: potentially has other objects on/in it
+ * (1.2 meters away) Drawer_121fdf6f(Drawer) is unexplored: potentially has other objects on/in it
+ * (1.2 meters away) Drawer_b23191f9(Drawer) is unexplored: potentially has other objects on/in it
+ * (2.2 meters away) Cabinet_1b680bcf(Cabinet) is unexplored: potentially has other objects on/in it
+ * (2.2 meters away) Cabinet_b92ee11c(Cabinet) is unexplored: potentially has other objects on/in it
+ * (2.2 meters away) Drawer_e33d0cbf(Drawer) is unexplored: potentially has other objects on/in it
+ * (2.2 meters away) Drawer_eb279e69(Drawer) is unexplored: potentially has other objects on/in it
+ * (3.3 meters away) CounterTop2(CounterTop) is unexplored: potentially has other objects on/in it
+ * (12.0 meters away) CounterTop4(CounterTop) has been fully explored: it has Kettle_03178b8d(Kettle), SoapBottle_8fe23096(SoapBottle), PaperTowelRoll_2363c502(PaperTowelRoll), and nothing else
+ * (21.7 meters away) CounterTop3(CounterTop) is unexplored: potentially has other objects on/in it
+ * (21.8 meters away) SinkBasin_8b626e24(SinkBasin) has been fully explored: it has Knife_9a8a6eda(Knife), Fork_3f9ae4b5(Fork), ButterKnife_9c168b7e(ButterKnife), Tomato_90b0ac7d(Tomato), and nothing else
+ * (22.3 meters away) Cabinet_2b3534ad(Cabinet) has been explored: it is empty
+ * (22.3 meters away) Cabinet_70f7d173(Cabinet) is unexplored: potentially has other objects on/in it
+ * (22.7 meters away) StoveBurner_71ec8a3a(StoveBurner) is partially explored: it has Pan_eb61f4ff(Pan), Pot_06043c8f(Pot), and potentially other objects
+ * (23.5 meters away) CounterTop5(CounterTop) is unexplored: potentially has other objects on/in it
+
+Object Knowledge:
+ * Apple_3ae85dc5(Apple) at Fridge_b4ec6389
+ * ButterKnife_9c168b7e(ButterKnife) at SinkBasin_8b626e24
+ * Cabinet_2b3534ad(Cabinet): opened,
+ * Cabinet_4faabc6f(Cabinet): closed,
+ * Cabinet_63381269(Cabinet): closed,
+ * Cabinet_70f7d173(Cabinet): closed,
+ * Drawer_b23191f9(Drawer): closed,
+ * Egg_45bb54d2(Egg) at Fridge_b4ec6389
+ * Faucet_ac648bfb(Faucet):turned off,
+ * Fork_3f9ae4b5(Fork) at SinkBasin_8b626e24
+ * Fridge_b4ec6389(Fridge): opened,
+ * Kettle_03178b8d(Kettle) at CounterTop4: closed,
+ * Knife_9a8a6eda(Knife) at SinkBasin_8b626e24
+ * Lettuce_a7611dd3(Lettuce) at Fridge_b4ec6389
+ * Pan_eb61f4ff(Pan) at StoveBurner_71ec8a3a clean,
+ * PaperTowelRoll_2363c502(PaperTowelRoll) at CounterTop4
+ * Pot_06043c8f(Pot) at StoveBurner_71ec8a3a clean,
+ * Potato_208e6ea2(Potato) at RobotGripper: uncooked,
+ * SinkBasin_8b626e24(SinkBasin)
+ * Sink_2ca389fe(Sink)
+ * SoapBottle_8fe23096(SoapBottle) at CounterTop4
+ * StoveBurner_71ec8a3a(StoveBurner)
+ * StoveBurner_c90d0c78(StoveBurner)
+ * StoveBurner_daf23be1(StoveBurner)
+ * StoveBurner_fdc051e1(StoveBurner)
+ * StoveKnob_32d7418d(StoveKnob):turned off,
+ * Tomato_90b0ac7d(Tomato) at SinkBasin_8b626e24
+ * Window_587c5f9e(Window)
+ * Window_ca369052(Window)
+
+Extra Instrucitons:
+[]
+------------------------------------------------------------
+History:
+--------
+ * (time 1) attend to subtask: go to explore a/an SinkBasin_8b626e24 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 2) motor action: move to sinkbasin_8b626e24 (justification: IF the current task is to explore a/an <receptacle> AND the <receptacle> is not at the current location AND the robot's gripper is empty THEN choose 'motor action: move to <receptacle>'.))
+ * (time 3) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 4) attend to subtask: go to explore a/an Cabinet_2b3534ad (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 5) motor action: move to cabinet_2b3534ad (justification: IF the current task is to explore a/an <receptacle> AND the <receptacle> is not at the current location AND the robot's gripper is empty THEN choose 'motor action: move to <receptacle>'.))
+ * (time 6) motor action: open cabinet_2b3534ad (justification: IF the current task is to explore a <receptacle> AND the robot is at the location of the <receptacle> AND the <receptacle> is closed and unexplored AND the robot's gripper is empty THEN choose 'motor action: open <receptacle>'.))
+ * (time 7) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 8) motor action: move to a/an Fridge_b4ec6389 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there is an unexplored <receptacle> that is commonly associated with the <object> THEN choose motor action: move to <receptacle>.))
+ * (time 9) attend to subtask: go to explore a/an Fridge_b4ec6389 (justification: IF the current task is to find a/an <object> AND the robot's gripper is empty AND there are unexplored receptacles in the kitchen THEN choose 'attend to subtask: go to explore a/an <closest_unexplored_receptacle>'.))
+ * (time 10) motor action: open fridge_b4ec6389 (justification: IF the current task is to explore a <receptacle> AND the robot is at the location of the <receptacle> AND the <receptacle> is closed and unexplored AND the robot's gripper is empty THEN choose 'motor action: open <receptacle>'.))
+ * (time 11) special action: done (justification: IF the current task is to explore a/an <receptacle> AND the robot is in front of the <receptacle> AND the <receptacle> has been fully explored THEN choose special action: 'done'.))
+ * (time 12) motor action: pick up potato (justification: IF the current task is to find a/an <object> AND the <object> is located in a/an <receptacle> AND the robot is in front of the <receptacle> AND the robot's gripper is empty THEN choose motor action: pick up <object>.))
+============================================================

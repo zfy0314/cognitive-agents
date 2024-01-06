@@ -1,0 +1,42 @@
+The robot wants to learn this action selection process as a production rule so that it can choose what action to take in the future on its own.
+
+Each production rule is composed of a set of preconditions and an effect, and has an "IF ... THEN ..." format. Basically it is saying if the preconditions are met, then choose a certain action. Note that the production rules can be parametrized. That is, it can have variable placeholders whose value will be assigned at runtime.
+
+The preconditions dictate whether the production is applicable, and has to be testable from the robot's knowledge (current task, current location, spatial knowledge, objects knowledge). The preconditions specify features from the observation that are important for the robot to make the decision.
+
+First, summarize the analysis above and identify the relevant information that is used for choosing the option "{action}" based on the previous information. Pay special attention to [Current Situation Analysis] and [Purpose] sections. The selected information should show why other options (with different actions, or the same action on a different target) are not chosen. This includes both information from the robot's knowledge and your own knowledge about kitchens. This might include the absence of some condition, such as something not in the robot's observation or the robot not at a certain location. In that case, use the "NOT" keyword. Be sure to include the current task description if this action is task-oriented. You should include very specific information. Instead of saying "the task has been successfully completed", refer to the specific part of the information that shows the task has been completed. Do not include information about the blacklisted actions.
+
+Next, combine the information in the previous part and express in English, the decision-making production rule for this specific case. It should be in the form of "IF ... THEN choose {action}". Where the IF part contains a conjunction of relevant knowledge. You may use the "AND" keyword in your production rule. You should include specific object names/types or location names for this rule.
+
+Afterward, for all the constants in the production rule (e.g. object types, location names, etc.), reflect on how each of them can be generalized. What specific feature of the instance leads to the decision? Does it has to be this specific object or can it be any object of the same category (or even more generalized category such as all objects/receptacles)? List all the components that can be generalized and what they should be generalized to. Your production should be applicable to all "{target_task}" type of tasks. You may leave this part blank if you think the specific rule generated above is already sufficiently generalized.
+
+Then, generate the generalized production rule by replacing the specific values in the specialized rule with a variable placeholder "<variable_name>" according to the previous section. This generalized production should be applicable to other similar but different situations. Keep in mind that rules are not themselves alternative actions, but instead units of context-dependent knowledge that contribute to making a decision and taking an action. You should try to make the rule as generalized as possible, capturing the underlying decision-making principles. You should also make the production rule as unambiguous as possible.
+If you have identified no generalizable components in the previous part, just copy the specific rule as your generalized rule.
+
+Finally, for each variable placeholder in the generalized rule, explain which specific object in the specialized rule it corresponds to.
+
+Note that the production rule you generated should respect the [Extra Instructions] (if any). You can assume the extra instructions are always there so you don't have to put them in the preconditions.
+
+You may include a short note at the end to explain your response.
+
+Use the following format:
+[Relevant Information]
+ * information 1
+ * information 2
+ ...
+
+[Specific Rule]
+IF ... THEN ...
+
+[Generalizable Constants]
+ * object1 could be anything that ...
+ * ...
+
+[Generalized Rule]
+IF ... THEN ...
+
+[Correspondence]
+ * component 1 is ...
+ * ...
+
+(optional) Notes: ...

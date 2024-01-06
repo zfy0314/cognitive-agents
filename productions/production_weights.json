@@ -1,0 +1,110 @@
+{
+  "SliceObject": [
+    0.8287958333333333,
+    9
+  ],
+  "MoveToSliceObject": [
+    0.9025,
+    6
+  ],
+  "PickUpObject": [
+    0.8591799999999998,
+    50
+  ],
+  "FindObjectInGripper": [
+    1.0,
+    38
+  ],
+  "PutAwayObjects": [
+    0.8087758681374366,
+    49
+  ],
+  "ExploreCountertop": [
+    0.5254434183968926,
+    47
+  ],
+  "ExploreReceptacle4": [
+    0.9255389221556898,
+    167
+  ],
+  "ClearReceptacleDone": [
+    1.0,
+    9
+  ],
+  "PlaceObjectInReceptacle": [
+    0.950000000000001,
+    59
+  ],
+  "FindObject2": [
+    0.8878343749999998,
+    12
+  ],
+  "FindSliceableObject": [
+    0.7873560416666665,
+    9
+  ],
+  "FindObject3": [
+    0.9499999999999998,
+    38
+  ],
+  "ExploreReceptacle2": [
+    1.0,
+    268
+  ],
+  "FindObjectProduction2": [
+    0.8576570312499999,
+    8
+  ],
+  "ExploreReceptacle": [
+    0.9287647058823547,
+    85
+  ],
+  "OpenReceptacle": [
+    0.730848581080123,
+    33
+  ],
+  "FindObjectProduction": [
+    0.7266818747687795,
+    160
+  ],
+  "ExploreCabinet": [
+    0.7289297393004402,
+    49
+  ],
+  "FindRequiredTool": [
+    0.8724166666666666,
+    9
+  ],
+  "ExploreReceptacle3": [
+    0.9500000000000015,
+    139
+  ],
+  "OpenReceptacleBeforePlacing": [
+    0.9025,
+    1
+  ],
+  "SliceAlreadySlicedObject": [
+    1.0,
+    9
+  ],
+  "SliceObject2": [
+    0.9549999999999998,
+    10
+  ],
+  "MoveToPickUpObject": [
+    0.8154805397727274,
+    44
+  ],
+  "MoveToTargetReceptacle": [
+    0.9016941964285726,
+    56
+  ],
+  "PlaceObjectInReceptacle2": [
+    1.0,
+    59
+  ],
+  "FindObject": [
+    0.7277596677007555,
+    85
+  ]
+}
